@@ -3,6 +3,8 @@
 input void SDL_REDRAW;
 input void SDL_QUIT;
 
+input _SDL_KeyboardEvent*    SDL_KEYDOWN;
+
 var int win_w;
 var int win_h;
 var _SDL_Window* win;
@@ -49,7 +51,7 @@ par/or do
 with
     every SDL_REDRAW do
         _SDL_SetRenderDrawColor(ren, 0,0,0,0x00);
-       	_SDL_RenderFillRect(ren, null);
+        _SDL_RenderFillRect(ren, null);
         _SDL_RenderCopy(ren, tex, &clip, &tex_r);
         _SDL_RenderPresent(ren);
     end
@@ -59,6 +61,23 @@ with
         clip.x = tex_w/2;
         await 500ms;
         clip.x = 0;
+    end
+with
+    loop do
+        var _SDL_KeyboardEvent* key = await SDL_KEYDOWN;
+        if key:keysym.sym == _SDLK_DOWN then
+            clip.y = 0*tex_h/4;
+            tex_r.y = tex_r.y + tex_h;
+        else/if key:keysym.sym == _SDLK_UP then
+            clip.y = 2*tex_h/4;
+            tex_r.y = tex_r.y - tex_h;
+        else/if key:keysym.sym == _SDLK_RIGHT then
+            clip.y = 1*tex_h/4;
+            tex_r.x = tex_r.x + tex_w;
+        else/if key:keysym.sym == _SDLK_LEFT then
+            clip.y = 3*tex_h/4;
+            tex_r.x = tex_r.x - tex_w;
+        end
     end
 end
 
