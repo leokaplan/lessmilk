@@ -43,13 +43,12 @@ var _SDL_Rect clip;
     clip.y = 0;
     clip.w = tex_w/2;
     clip.h = tex_h/4;
-var int i = 0;
+
 par/or do
     await SDL_QUIT;
 with
-    loop do
-        await SDL_REDRAW;
-	_SDL_SetRenderDrawColor(ren, 0,0,0,0x00);
+    every SDL_REDRAW do
+        _SDL_SetRenderDrawColor(ren, 0,0,0,0x00);
        	_SDL_RenderFillRect(ren, null);
         _SDL_RenderCopy(ren, tex, &clip, &tex_r);
         _SDL_RenderPresent(ren);
@@ -57,12 +56,9 @@ with
 with
     loop do
         await 500ms;
-        if i%2 then
-            clip.x = tex_w/2;
-	else 
-            clip.x = 0;
-        end
-        i = i + 1;
+        clip.x = tex_w/2;
+        await 500ms;
+        clip.x = 0;
     end
 end
 
