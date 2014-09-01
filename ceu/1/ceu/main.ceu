@@ -63,8 +63,8 @@ with
         clip.x = 0;
     end
 with
-    loop do
-        var _SDL_KeyboardEvent* key = await SDL_KEYDOWN;
+    var _SDL_KeyboardEvent* key;
+    every key in SDL_KEYDOWN do
         if key:keysym.sym == _SDLK_DOWN then
             clip.y = 0*tex_h/4;
             tex_r.y = tex_r.y + tex_h;
