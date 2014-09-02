@@ -39,7 +39,7 @@ with
     await FOREVER;
 with
     pool Enemy[10] enemies;
-    every 1s do
+    every 500ms do
         spawn Enemy in enemies with
            this.ren = ren;
            if _rand()%2 then 

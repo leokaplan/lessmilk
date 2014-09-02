@@ -39,9 +39,9 @@ do
     var bool walk_st; 
     var int d_x = this.xf - this.x0;
     var int d_y = this.yf - this.y0;
-    var int vx = d_x/speed;
-    var int vy = d_y/speed;
-    par/and do
+    var int vx = d_x/this.speed;
+    var int vy = d_y/this.speed;
+    par/or do
          every SDL_REDRAW do
             _SDL_RenderCopy(ren, tex, &clip, &tex_r);
         end
@@ -57,7 +57,10 @@ do
             walk_st = not walk_st;
             this.col_box.x = tex_r.x;
             this.col_box.y = tex_r.y;
-            await 100ms;//speed
+            if tex_r.x > xf or tex_r.x < 0 or tex_r.y > yf or tex_r.y < 0 then
+                break;
+            end
+            await (this.speed)ms;
         end
     end
 end
