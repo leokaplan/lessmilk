@@ -1,14 +1,10 @@
 class Player with
     var _SDL_Rect col_box; 
+do
     var _SDL_Renderer[] ren;
-do    
-    var _SDL_Texture* tex;
-    finalize
-        tex = _IMG_LoadTexture(ren, "../images/player.png");
-    with
-        _SDL_DestroyTexture(tex);
-    end
-
+    var _SDL_Texture[] tex;  
+    tex = _texPLAYER;
+    ren = _REN;
     var int tex_w,tex_h;
     _SDL_QueryTexture(tex,null,null,&tex_w,&tex_h);
 
@@ -35,7 +31,7 @@ do
         #define step_x (tex_w/2)
     par/and do
          every SDL_REDRAW do
-            _SDL_RenderCopy(ren, tex, &clip, &tex_r);
+            _SDL_RenderCopy(ren,tex, &clip, &tex_r);
         end
     with
         every key in SDL_KEYDOWN do

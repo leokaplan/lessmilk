@@ -1,21 +1,14 @@
 class Enemy with
     var _SDL_Rect col_box; 
-    var _SDL_Renderer[] ren;
     var int x0, y0, xf, yf, speed;
 do    
-    var _SDL_Texture* tex;
+    var _SDL_Renderer[] ren;
+    ren =_REN;
+    var _SDL_Texture[] tex;
     if _rand()%2 then
-        finalize
-            tex = _IMG_LoadTexture(ren, "../images/enemy1.png");
-         with
-            _SDL_DestroyTexture(tex);
-        end
+        tex = _texENEMY1;        
     else
-        finalize
-            tex = _IMG_LoadTexture(ren, "../images/enemy2.png");
-        with
-            _SDL_DestroyTexture(tex);
-        end
+        tex = _texENEMY2;
     end
     var int tex_w,tex_h;
     _SDL_QueryTexture(tex,null,null,&tex_w,&tex_h);
