@@ -53,7 +53,7 @@ with
                this.x0 = _rand()%win_w; 
                this.xf = _rand()%win_w;
            end
-          this.speed = 100;
+          this.speed = _rand()%100+50;
         end;
     end
 with
