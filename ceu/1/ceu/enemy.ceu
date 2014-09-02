@@ -4,12 +4,19 @@ class Enemy with
     var int x0, y0, xf, yf, speed;
 do    
     var _SDL_Texture* tex;
-    finalize
-        tex = _IMG_LoadTexture(ren, "../images/enemy1.png");
-    with
-        _SDL_DestroyTexture(tex);
+    if _rand()%2 then
+        finalize
+            tex = _IMG_LoadTexture(ren, "../images/enemy1.png");
+         with
+            _SDL_DestroyTexture(tex);
+        end
+    else
+        finalize
+            tex = _IMG_LoadTexture(ren, "../images/enemy2.png");
+        with
+            _SDL_DestroyTexture(tex);
+        end
     end
-
     var int tex_w,tex_h;
     _SDL_QueryTexture(tex,null,null,&tex_w,&tex_h);
 
