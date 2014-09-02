@@ -22,81 +22,9 @@ var _SDL_Renderer[] ren;
     with
         _SDL_DestroyRenderer(ren);
     end
-
-class Player with
-    var _SDL_Rect col_box; 
-    var _SDL_Renderer[] ren;
-do    
-    var _SDL_Texture* tex;
-    finalize
-        tex = _IMG_LoadTexture(ren, "../images/player.png");
-    with
-        _SDL_DestroyTexture(tex);
-    end
-
-    var int tex_w,tex_h;
-    _SDL_QueryTexture(tex,null,null,&this.tex_w,&this.tex_h);
-
-    var _SDL_Rect tex_r;
-    tex_r.x = 100;
-    tex_r.y = 100;
-    tex_r.w = tex_w;
-    tex_r.h = tex_h;
-
-    var _SDL_Rect clip;
-    clip.x = 0;
-    clip.y = 0;
-    clip.w = tex_w/2;
-    clip.h = tex_h/4;
     
-    this.col_box.x = tex_r.x;
-    this.col_box.y = tex_r.y;
-    this.col_box.w = clip.w;
-    this.col_box.h = clip.h;
-    
-    var _SDL_KeyboardEvent* key;
-    var bool walk_st;
-        #define step_y (tex_h/2)
-        #define step_x (tex_w/2)
-    par/and do
-         every SDL_REDRAW do
-            _SDL_RenderCopy(ren, tex, &clip, &tex_r);
-        end
-    with
-        every key in SDL_KEYDOWN do
-            if key:keysym.sym == _SDLK_DOWN then
-                clip.y = 0*tex_h/4;
-                tex_r.y = tex_r.y + step_y;
-            else/if key:keysym.sym == _SDLK_UP then
-                clip.y = 2*tex_h/4;
-                tex_r.y = tex_r.y - step_y;
-            else/if key:keysym.sym == _SDLK_RIGHT then
-                clip.y = 1*tex_h/4;
-                tex_r.x = tex_r.x + step_x;
-            else/if key:keysym.sym == _SDLK_LEFT then
-                clip.y = 3*tex_h/4;
-                tex_r.x = tex_r.x - step_x;
-            end
-            if walk_st then
-                clip.x = tex_w/2;
-            else
-                clip.x = 0;
-            end
-            walk_st = not walk_st;
-            this.col_box.x = tex_r.x;
-            this.col_box.y = tex_r.y;
-            this.col_box.w = clip.w;
-            this.col_box.h = clip.h;
-        end
-    with
-        loop do 
-            await SDL_KEYDOWN;
-            await 100ms;
-        end
-    end
-end
-
-
+#include "player.ceu"
+#include "enemy.ceu"
 par/or do
     await SDL_QUIT;
 with
@@ -109,6 +37,25 @@ with
         this.ren = ren;
     end;
     await FOREVER;
+with
+    pool Enemy[10] enemies;
+    every 1s do
+        spawn Enemy in enemies with
+           this.ren = ren;
+           if _rand()%2 then 
+               this.x0 = 0; 
+               this.xf = win_w;
+               this.y0 = _rand()%win_h; 
+               this.yf = _rand()%win_h; 
+           else
+               this.y0 = 0; 
+               this.yf = win_h;
+               this.x0 = _rand()%win_w; 
+               this.xf = _rand()%win_w;
+           end
+          this.speed = 100;
+        end;
+    end
 with
     every SDL_REDRAW do
         _SDL_RenderPresent(ren);

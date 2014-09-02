@@ -1,0 +1,58 @@
+class Enemy with
+    var _SDL_Rect col_box; 
+    var _SDL_Renderer[] ren;
+    var int x0, y0, xf, yf, speed;
+do    
+    var _SDL_Texture* tex;
+    finalize
+        tex = _IMG_LoadTexture(ren, "../images/enemy1.png");
+    with
+        _SDL_DestroyTexture(tex);
+    end
+
+    var int tex_w,tex_h;
+    _SDL_QueryTexture(tex,null,null,&tex_w,&tex_h);
+
+    var _SDL_Rect tex_r;
+    tex_r.x = this.x0;
+    tex_r.y = this.y0;
+    tex_r.w = tex_w;
+    tex_r.h = tex_h;
+
+    var _SDL_Rect clip;
+    clip.x = 0;
+    clip.y = 0;
+    clip.w = tex_w/2;
+    clip.h = tex_h;
+    
+    this.col_box.x = tex_r.x;
+    this.col_box.y = tex_r.y;
+    this.col_box.w = clip.w;
+    this.col_box.h = clip.h;
+    var bool walk_st; 
+    var int d_x = this.xf - this.x0;
+    var int d_y = this.yf - this.y0;
+    var int vx = d_x/speed;
+    var int vy = d_y/speed;
+    par/and do
+         every SDL_REDRAW do
+            _SDL_RenderCopy(ren, tex, &clip, &tex_r);
+        end
+    with
+        loop do
+            tex_r.x = tex_r.x + vx;
+            tex_r.y = tex_r.y + vy;
+            if walk_st then
+                clip.x = tex_w/2;
+            else
+                clip.x = 0;
+            end
+            walk_st = not walk_st;
+            this.col_box.x = tex_r.x;
+            this.col_box.y = tex_r.y;
+            await 100ms;//speed
+        end
+    end
+end
+
+
