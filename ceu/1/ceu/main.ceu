@@ -16,35 +16,86 @@ var _SDL_Window* win;
 
 _SDL_GetWindowSize(win, &win_w, &win_h);
 
-var _SDL_Renderer* ren;
+var _SDL_Renderer[] ren;
     finalize
         ren = _SDL_CreateRenderer(win, -1, 0);
     with
         _SDL_DestroyRenderer(ren);
     end
 
-
-var _SDL_Texture* tex;
+class Player with
+    var _SDL_Rect col_box; 
+    var _SDL_Renderer[] ren;
+do    
+    var _SDL_Texture* tex;
     finalize
         tex = _IMG_LoadTexture(ren, "../images/player.png");
     with
         _SDL_DestroyTexture(tex);
     end
-var int tex_w,tex_h;
 
-_SDL_QueryTexture(tex,null,null,&tex_w,&tex_h);
+    var int tex_w,tex_h;
+    _SDL_QueryTexture(tex,null,null,&this.tex_w,&this.tex_h);
 
-var _SDL_Rect tex_r;
+    var _SDL_Rect tex_r;
     tex_r.x = 100;
     tex_r.y = 100;
     tex_r.w = tex_w;
     tex_r.h = tex_h;
 
-var _SDL_Rect clip;
+    var _SDL_Rect clip;
     clip.x = 0;
     clip.y = 0;
     clip.w = tex_w/2;
     clip.h = tex_h/4;
+    
+    this.col_box.x = tex_r.x;
+    this.col_box.y = tex_r.y;
+    this.col_box.w = clip.w;
+    this.col_box.h = clip.h;
+    
+    var _SDL_KeyboardEvent* key;
+    var bool walk_st;
+        #define step_y (tex_h/2)
+        #define step_x (tex_w/2)
+    par/and do
+         every SDL_REDRAW do
+            _SDL_RenderCopy(ren, tex, &clip, &tex_r);
+        end
+    with
+        every key in SDL_KEYDOWN do
+            if key:keysym.sym == _SDLK_DOWN then
+                clip.y = 0*tex_h/4;
+                tex_r.y = tex_r.y + step_y;
+            else/if key:keysym.sym == _SDLK_UP then
+                clip.y = 2*tex_h/4;
+                tex_r.y = tex_r.y - step_y;
+            else/if key:keysym.sym == _SDLK_RIGHT then
+                clip.y = 1*tex_h/4;
+                tex_r.x = tex_r.x + step_x;
+            else/if key:keysym.sym == _SDLK_LEFT then
+                clip.y = 3*tex_h/4;
+                tex_r.x = tex_r.x - step_x;
+            end
+            if walk_st then
+                clip.x = tex_w/2;
+            else
+                clip.x = 0;
+            end
+            walk_st = not walk_st;
+            this.col_box.x = tex_r.x;
+            this.col_box.y = tex_r.y;
+            this.col_box.w = clip.w;
+            this.col_box.h = clip.h;
+        end
+    with
+        loop do 
+            await SDL_KEYDOWN;
+            await 100ms;
+        end
+    end
+end
+
 
 par/or do
     await SDL_QUIT;
@@ -52,32 +103,15 @@ with
     every SDL_REDRAW do
         _SDL_SetRenderDrawColor(ren, 0,0,0,0x00);
         _SDL_RenderFillRect(ren, null);
-        _SDL_RenderCopy(ren, tex, &clip, &tex_r);
+    end
+with 
+    var Player player with
+        this.ren = ren;
+    end;
+    await FOREVER;
+with
+    every SDL_REDRAW do
         _SDL_RenderPresent(ren);
-    end
-with
-    loop do
-        await 500ms;
-        clip.x = tex_w/2;
-        await 500ms;
-        clip.x = 0;
-    end
-with
-    var _SDL_KeyboardEvent* key;
-    every key in SDL_KEYDOWN do
-        if key:keysym.sym == _SDLK_DOWN then
-            clip.y = 0*tex_h/4;
-            tex_r.y = tex_r.y + tex_h;
-        else/if key:keysym.sym == _SDLK_UP then
-            clip.y = 2*tex_h/4;
-            tex_r.y = tex_r.y - tex_h;
-        else/if key:keysym.sym == _SDLK_RIGHT then
-            clip.y = 1*tex_h/4;
-            tex_r.x = tex_r.x + tex_w;
-        else/if key:keysym.sym == _SDLK_LEFT then
-            clip.y = 3*tex_h/4;
-            tex_r.x = tex_r.x - tex_w;
-        end
     end
 end
 
