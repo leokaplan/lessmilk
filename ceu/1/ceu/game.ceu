@@ -1,0 +1,49 @@
+
+class Game with
+    event void ok;
+    var int win_w; 
+    var int win_h; 
+do
+input int SDL_DT;
+input _SDL_KeyboardEvent*    SDL_KEYDOWN;
+var int ms;
+
+#include "player.ceu"
+#include "enemy.ceu"
+
+par/or do
+    var Player player;
+    await FOREVER;
+with
+    pool Enemy[10] enemies;
+    par/or do
+        every 500ms do
+            spawn Enemy in enemies with
+                
+                if _rand()%2 then 
+                    this.x0 = 0; 
+                    this.xf = win_w;
+                    this.y0 = _rand()%win_h; 
+                    this.yf = _rand()%win_h; 
+                else
+                    this.y0 = 0; 
+                    this.yf = win_h;
+                    this.x0 = _rand()%win_w; 
+                    this.xf = _rand()%win_w;
+                end
+                this.speed = _rand()%100+50;
+            end;
+        end
+    with
+        every ms in SDL_DT do
+            loop (Enemy *)e in enemies do
+               //if SDLRect_vs_SDLRect(e.col_box,player.col_box)then
+                 //if not (((e.col_box.y+e.col_box.h) < player.col_box.y) or  ((player.col_box.y+player.col_box.h) < e.col_box.y) or ((e.col_box.x+e.col_box.w) < player.col_box.x) or ((player.col_box.x+player.col_box.w) < e.col_box.x)) then
+
+                  // emit ok;
+                //end
+            end        
+        end
+    end
+end
+end	

@@ -1,0 +1,23 @@
+native do
+    SDL_Texture* texPLAYER;
+    SDL_Texture* texENEMY1;
+    SDL_Texture* texENEMY2;
+end
+    finalize
+        _texPLAYER = _IMG_LoadTexture(_REN, "../images/player.png");
+    with
+        _SDL_DestroyTexture(_texPLAYER);
+    end
+
+    finalize
+        _texENEMY1 = _IMG_LoadTexture(_REN, "../images/enemy1.png");
+    with
+        _SDL_DestroyTexture(_texENEMY1);
+    end
+
+    finalize
+        _texENEMY2 = _IMG_LoadTexture(_REN, "../images/enemy2.png");
+    with
+        _SDL_DestroyTexture(_texENEMY2);
+    end
+   

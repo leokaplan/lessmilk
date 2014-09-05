@@ -2,10 +2,7 @@
 
 input void SDL_REDRAW;
 input void SDL_QUIT;
-input int SDL_DT;
-input _SDL_KeyboardEvent*    SDL_KEYDOWN;
 
-var int ms;
 var int win_w;
 var int win_h;
 var _SDL_Window* win;
@@ -18,36 +15,17 @@ var _SDL_Window* win;
 _SDL_GetWindowSize(win, &win_w, &win_h);
 native do
     SDL_Renderer* REN;
-    SDL_Texture* texPLAYER;
-    SDL_Texture* texENEMY1;
-    SDL_Texture* texENEMY2;
 end
-    finalize
-        _REN = _SDL_CreateRenderer(win, -1, 0);
-    with
-        _SDL_DestroyRenderer(_REN);
-    end
+finalize
+    _REN = _SDL_CreateRenderer(win, -1, 0);
+with
+    _SDL_DestroyRenderer(_REN);
+end
 
-    finalize
-        _texPLAYER = _IMG_LoadTexture(_REN, "../images/player.png");
-    with
-        _SDL_DestroyTexture(_texPLAYER);
-    end
-
-    finalize
-        _texENEMY1 = _IMG_LoadTexture(_REN, "../images/enemy1.png");
-    with
-        _SDL_DestroyTexture(_texENEMY1);
-    end
-
-    finalize
-        _texENEMY2 = _IMG_LoadTexture(_REN, "../images/enemy2.png");
-    with
-        _SDL_DestroyTexture(_texENEMY2);
-    end
    
-#include "player.ceu"
-#include "enemy.ceu"
+#include "load.ceu"
+
+#include "game.ceu"
 //function (_SDL_Rect a, _SDL_Rect b) => bool r do
 //    if
 
@@ -59,38 +37,11 @@ with
         _SDL_RenderFillRect(_REN, null);
     end
 with 
-    var Player player;
-    await FOREVER;
-with
-    pool Enemy[10] enemies;
-    par/or do
-        every 500ms do
-            spawn Enemy in enemies with
-                
-                if _rand()%2 then 
-                    this.x0 = 0; 
-                    this.xf = win_w;
-                    this.y0 = _rand()%win_h; 
-                    this.yf = _rand()%win_h; 
-                else
-                    this.y0 = 0; 
-                    this.yf = win_h;
-                    this.x0 = _rand()%win_w; 
-                    this.xf = _rand()%win_w;
-                end
-                this.speed = _rand()%100+50;
-            end;
-        end
-    with
-        every ms in SDL_DT do
-            loop (Enemy *)e in enemies do
-               //if SDLRect_vs_SDLRect(e.col_box,player.col_box)then
-               // if not (((e.col_box.y+e.col_box.h) < player.col_box.y) or  ((player.col_box.y+player.col_box.h) < e.col_box.y) or ((e.col_box.x+e.col_box.w) < player.col_box.x) or ((player.col_box.x+player.col_box.w) < e.col_box.x)) then
-
-                  // break;
-                //end
-            end        
-        end
+    loop do
+       do Game with
+           this.win_w = win_w;
+           this.win_h = win_w;
+       end;
     end
 with
     every SDL_REDRAW do
