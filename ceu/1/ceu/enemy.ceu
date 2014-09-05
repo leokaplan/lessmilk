@@ -13,20 +13,35 @@ do
     var int tex_w,tex_h;
     _SDL_QueryTexture(tex,null,null,&tex_w,&tex_h);
 
-   if _rand()%2 then 
-        x0 = 0; 
-        xf = WIN_W;
-        y0 = _rand()%WIN_H; 
-        yf = _rand()%WIN_H; 
+    if _rand()%2 then
+        if _rand()%2 then 
+            x0 = 0; 
+            y0 = _rand()%WIN_H; 
+            xf = WIN_W;
+            yf = _rand()%WIN_H; 
+        else
+            x0 = _rand()%WIN_W; 
+            y0 = 0; 
+            xf = _rand()%WIN_W;
+            yf = WIN_H;
+        end
     else
-        y0 = 0; 
-        yf = WIN_H;
-        x0 = _rand()%WIN_W; 
-        xf = _rand()%WIN_W;
+        if _rand()%2 then 
+            x0 = WIN_W;
+            y0 = _rand()%WIN_H; 
+            xf = 0; 
+            yf = _rand()%WIN_H; 
+        else
+            x0 = _rand()%WIN_W; 
+            y0 = WIN_H;
+            xf = _rand()%WIN_W;
+            yf = 0; 
+        end
     end
+    speed = _rand()%25+50;
     var _SDL_Rect tex_r;
-    tex_r.x = this.x0;
-    tex_r.y = this.y0;
+    tex_r.x = x0;
+    tex_r.y = y0;
     tex_r.w = tex_w;
     tex_r.h = tex_h;
 
@@ -41,16 +56,17 @@ do
     this.col_box.w = clip.w;
     this.col_box.h = clip.h;
     var bool walk_st; 
-    var int d_x = this.xf - this.x0;
-    var int d_y = this.yf - this.y0;
-    var int vx = d_x/this.speed;
-    var int vy = d_y/this.speed;
+    var int d_x = xf - x0;
+    var int d_y = yf - y0;
+    var int vx = d_x/speed;
+    var int vy = d_y/speed;
     par/or do
          every SDL_REDRAW do
-            _SDL_RenderCopy(ren, tex, &clip, &tex_r);
+            _SDL_RenderCopy(ren, tex, &clip, &this.col_box);
         end
     with
         loop do
+            await (speed)ms;
             tex_r.x = tex_r.x + vx;
             tex_r.y = tex_r.y + vy;
             if walk_st then
@@ -61,10 +77,9 @@ do
             walk_st = not walk_st;
             this.col_box.x = tex_r.x;
             this.col_box.y = tex_r.y;
-            if tex_r.x > xf or tex_r.x < 0 or tex_r.y > yf or tex_r.y < 0 then
+            if tex_r.x > WIN_W or tex_r.x < 0 or tex_r.y > WIN_H or tex_r.y < 0 then
                 break;
             end
-            await (this.speed)ms;
         end
     end
 end

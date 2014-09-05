@@ -23,11 +23,6 @@ with
     _SDL_DestroyRenderer(_REN);
 end
 
-interface Global with
-    var int v,c;
-end
-var int v = 0;
-var int c = 0;
    
 #include "load.ceu"
 

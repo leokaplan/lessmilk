@@ -7,25 +7,27 @@ input _SDL_KeyboardEvent*    SDL_KEYDOWN;
 class Game with
     event void ok;
 do
+    var int score = 0;
     var Player player;
-    pool Enemy[10] enemies;
+    pool Enemy[20] enemies;
     par do
-        every 500ms do
-            spawn Enemy in enemies with
-                
-               this.speed = _rand()%50+50;
-            end;
+        every (_rand()%100+200)ms do
+            spawn Enemy in enemies;
         end
     with
         var int ms;
         every ms in SDL_DT do
             loop (Enemy *)e in enemies do
                //if SDLRect_vs_SDLRect(e:col_box,player.col_box)then
-                 if not (((e:col_box.y+e:col_box.h) < player.col_box.y) or  ((player.col_box.y+player.col_box.h) < e:col_box.y) or ((e:col_box.x+e:col_box.w) < player.col_box.x) or ((player.col_box.x+player.col_box.w) < e:col_box.x)) then
-
+                if not (((e:col_box.y+e:col_box.h) < player.col_box.y) or ((player.col_box.y+player.col_box.h) < e:col_box.y) or ((e:col_box.x+e:col_box.w) < player.col_box.x) or ((player.col_box.x+player.col_box.w) < e:col_box.x)) then
+                  _printf("~~#~~ SCORE  %d ~~#~~\n",score);
                   emit ok;
                 end
             end        
+        end
+    with
+        every 50ms do
+            score = score+1;
         end
     end
 end

@@ -9,8 +9,8 @@ do
     _SDL_QueryTexture(tex,null,null,&tex_w,&tex_h);
 
     var _SDL_Rect tex_r;
-    tex_r.x = 100;
-    tex_r.y = 100;
+    tex_r.x = WIN_W/2;
+    tex_r.y = WIN_H/2;
     tex_r.w = tex_w;
     tex_r.h = tex_h;
 
@@ -27,17 +27,17 @@ do
     
     var _SDL_KeyboardEvent* key;
     var bool walk_st;
-        #define step_y (tex_h/2)
+        #define step_y (tex_h/4)
         #define step_x (tex_w/2)
     par/and do
          every SDL_REDRAW do
-            _SDL_RenderCopy(ren,tex, &clip, &tex_r);
+            _SDL_RenderCopy(ren,tex, &clip,&this.col_box);
         end
     with
         every key in SDL_KEYDOWN do
             if key:keysym.sym == _SDLK_DOWN then
                 clip.y = 0*clip.h;
-                if tex_r.y<WIN_H then
+                if tex_r.y<(WIN_H-clip.h) then
                     tex_r.y = tex_r.y + step_y;
                 end
             else/if key:keysym.sym == _SDLK_UP then
@@ -47,7 +47,7 @@ do
                 end
             else/if key:keysym.sym == _SDLK_RIGHT then
                 clip.y = 1*clip.h;
-                if tex_r.x<WIN_W then
+                if tex_r.x<(WIN_W-clip.w) then
                     tex_r.x = tex_r.x + step_x;
                 end
             else/if key:keysym.sym == _SDLK_LEFT then
@@ -64,13 +64,11 @@ do
             walk_st = not walk_st;
             this.col_box.x = tex_r.x;
             this.col_box.y = tex_r.y;
-            this.col_box.w = clip.w;
-            this.col_box.h = clip.h;
         end
     with
         loop do 
             await SDL_KEYDOWN;
-            await 100ms;
+            await 50ms;
         end
     end
 end
