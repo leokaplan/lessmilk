@@ -37,16 +37,24 @@ do
         every key in SDL_KEYDOWN do
             if key:keysym.sym == _SDLK_DOWN then
                 clip.y = 0*clip.h;
-                tex_r.y = tex_r.y + step_y;
+                if tex_r.y<WIN_H then
+                    tex_r.y = tex_r.y + step_y;
+                end
             else/if key:keysym.sym == _SDLK_UP then
                 clip.y = 2*clip.h;
-                tex_r.y = tex_r.y - step_y;
+                if tex_r.y>0 then 
+                    tex_r.y = tex_r.y - step_y;
+                end
             else/if key:keysym.sym == _SDLK_RIGHT then
                 clip.y = 1*clip.h;
-                tex_r.x = tex_r.x + step_x;
+                if tex_r.x<WIN_W then
+                    tex_r.x = tex_r.x + step_x;
+                end
             else/if key:keysym.sym == _SDLK_LEFT then
                 clip.y = 3*clip.h;
-                tex_r.x = tex_r.x - step_x;
+                if tex_r.x>0 then
+                    tex_r.x = tex_r.x - step_x;
+                end
             end
             if walk_st then
                 clip.x = tex_w/2;

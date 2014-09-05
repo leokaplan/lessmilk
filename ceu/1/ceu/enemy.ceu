@@ -1,7 +1,7 @@
 class Enemy with
     var _SDL_Rect col_box; 
-    var int x0, y0, xf, yf, speed;
 do    
+    var int x0, y0, xf, yf, speed;
     var _SDL_Renderer[] ren;
     ren =_REN;
     var _SDL_Texture[] tex;
@@ -13,6 +13,17 @@ do
     var int tex_w,tex_h;
     _SDL_QueryTexture(tex,null,null,&tex_w,&tex_h);
 
+   if _rand()%2 then 
+        x0 = 0; 
+        xf = WIN_W;
+        y0 = _rand()%WIN_H; 
+        yf = _rand()%WIN_H; 
+    else
+        y0 = 0; 
+        yf = WIN_H;
+        x0 = _rand()%WIN_W; 
+        xf = _rand()%WIN_W;
+    end
     var _SDL_Rect tex_r;
     tex_r.x = this.x0;
     tex_r.y = this.y0;

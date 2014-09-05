@@ -3,16 +3,17 @@
 input void SDL_REDRAW;
 input void SDL_QUIT;
 
-var int win_w;
-var int win_h;
+#define WIN_W 640
+#define WIN_H 480
+
 var _SDL_Window* win;
     finalize
-        win = _SDL_CreateWindow("Lessmilk 1", 500, 1300, 800, 480, _SDL_WINDOW_SHOWN);
+        win = _SDL_CreateWindow("Lessmilk 1", 640, 480,WIN_W , WIN_H, _SDL_WINDOW_SHOWN);
     with
         _SDL_DestroyWindow(win);
     end
 
-_SDL_GetWindowSize(win, &win_w, &win_h);
+//_SDL_GetWindowSize(win, &win_w, &win_h);
 native do
     SDL_Renderer* REN;
 end
@@ -22,10 +23,17 @@ with
     _SDL_DestroyRenderer(_REN);
 end
 
+interface Global with
+    var int v,c;
+end
+var int v = 0;
+var int c = 0;
    
 #include "load.ceu"
 
 #include "game.ceu"
+
+#include "menu.ceu"
 //function (_SDL_Rect a, _SDL_Rect b) => bool r do
 //    if
 
@@ -38,10 +46,8 @@ with
     end
 with 
     loop do
-       do Game with
-           this.win_w = win_w;
-           this.win_h = win_w;
-       end;
+       do Menu;
+       do Game;
     end
 with
     every SDL_REDRAW do
