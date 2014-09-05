@@ -1,5 +1,6 @@
 class Enemy with
-    var _SDL_Rect col_box; 
+    var _SDL_Rect col_box;
+    var int level; 
 do    
     var int x0, y0, xf, yf, speed;
     var _SDL_Renderer[] ren;
@@ -38,7 +39,12 @@ do
             yf = 0; 
         end
     end
-    speed = _rand()%25+50;
+    speed = _rand()%25 + 10;
+    var int mod = 50-level;//(_sqrt(level));
+    if mod < 0 then 
+        mod = 0;
+    end
+    speed = speed + mod;
     var _SDL_Rect tex_r;
     tex_r.x = x0;
     tex_r.y = y0;

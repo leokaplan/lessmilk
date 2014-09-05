@@ -8,11 +8,14 @@ class Game with
     event void ok;
 do
     var int score = 0;
+    var int level = 0;
     var Player player;
     pool Enemy[20] enemies;
     par do
         every (_rand()%100+200)ms do
-            spawn Enemy in enemies;
+            spawn Enemy in enemies with
+                this.level = level;
+            end;
         end
     with
         var int ms;
@@ -27,7 +30,11 @@ do
         end
     with
         every 50ms do
-            score = score+1;
+            score = score + 1;
+        end
+    with
+        every 1s do
+            level = level + 1;
         end
     end
 end
