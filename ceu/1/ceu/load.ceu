@@ -2,6 +2,7 @@ native do
     SDL_Texture* texPLAYER;
     SDL_Texture* texENEMY1;
     SDL_Texture* texENEMY2;
+    TTF_Font* fnt;
 end
     finalize
         _texPLAYER = _IMG_LoadTexture(_REN, "../images/player.png");
@@ -20,4 +21,16 @@ end
     with
         _SDL_DestroyTexture(_texENEMY2);
     end
-   
+ 
+_TTF_Init();
+    finalize with
+        _TTF_Quit();
+    end
+    finalize
+        _fnt = _TTF_OpenFont("../fonts/Deutsch.ttf", 40);
+    with
+        _TTF_CloseFont(_fnt);
+    end
+
+
+
