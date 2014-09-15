@@ -2,8 +2,22 @@ Semana #2 (08/09 => 15/09)
 --------------------------
 
 ### O que eu faria?
+
+* Adequaria as variaveis e telas para o original.
+
+* Ficaria em função do Terra.
+
 ### O que eu fiz?
+
+* Pus texto e adequei as variaveis.
+
+* Adiantei o que eu precisava fazer no Terra.
+
 ### O que eu farei?
+
+* Farei rotações dinamicas nos inimigos usando sdl-gfx (em vez de salvar uma spritesheet com as rotações e carrega-las).
+
+* Vou começar a implementar o segundo jogo.
 
 Semana #1 (01/09 => 08/09)
 --------------------------
