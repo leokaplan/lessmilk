@@ -2,7 +2,7 @@ input int SDL_DT;
 input _SDL_KeyboardEvent*    SDL_KEYDOWN;
 
 #include "player.ceu"
-//#include "enemy.ceu"
+#include "enemy.ceu"
 
 class Game with
     event void ok;
@@ -13,14 +13,14 @@ do
     var int  score_size = 0;
             
     var Player player;
-   // pool Enemy[10] enemies;
+    pool Enemy[10] enemies;
     par do
         every 1s do
             score = score + 1;
         end
     with
         every 500ms do
-     //       spawn Enemy in enemies;
+            spawn Enemy in enemies;
         end
     with
         every SDL_REDRAW do

@@ -6,10 +6,12 @@ native do
     SDL_Texture* texENEMY;
     SDL_Texture* texENEMY1;
     SDL_Texture* texENEMY2;
+    SDL_Texture* texFIRE;
     TTF_Font* fnt;
 end
     
     load( _texPLAYER , "../images/player.png" );
+    load( _texFIRE , "../images/fire.png" );
     load( _texPIXEL , "../images/pixel.png" );
     load( _texENEMY , "../images/enemy.png" );
     load( _texENEMY1 , "../images/enemy1.png" );

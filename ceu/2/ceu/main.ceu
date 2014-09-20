@@ -8,7 +8,7 @@ input void SDL_QUIT;
 
 var _SDL_Window* win;
     finalize
-        win = _SDL_CreateWindow("Lessmilk 1", 640, 480,WIN_W , WIN_H, _SDL_WINDOW_SHOWN);
+        win = _SDL_CreateWindow("Lessmilk 2", 640, 480,WIN_W , WIN_H, _SDL_WINDOW_SHOWN);
     with
         _SDL_DestroyWindow(win);
     end

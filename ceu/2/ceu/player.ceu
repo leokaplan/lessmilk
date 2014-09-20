@@ -58,7 +58,7 @@ do
             end
             x = x + speed_x/100;
             y = y + speed_y/100;
-            if not(x > WIN_W or x < 0 or y > WIN_H or y < 0) then
+            if not(x > WIN_W-clip.w or x < 0 or y > WIN_H or y < 0) then
                 this.col_box.x = x;
                 this.col_box.y = y;
             end
