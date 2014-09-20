@@ -1,0 +1,53 @@
+#include "sdl.ceu"
+
+input void SDL_REDRAW;
+input void SDL_QUIT;
+
+#define WIN_W 640
+#define WIN_H 480
+
+var _SDL_Window* win;
+    finalize
+        win = _SDL_CreateWindow("Lessmilk 1", 640, 480,WIN_W , WIN_H, _SDL_WINDOW_SHOWN);
+    with
+        _SDL_DestroyWindow(win);
+    end
+
+//_SDL_GetWindowSize(win, &win_w, &win_h);
+native do
+    SDL_Renderer* REN;
+end
+finalize
+    _REN = _SDL_CreateRenderer(win, -1, 0);
+with
+    _SDL_DestroyRenderer(_REN);
+end
+
+   
+#include "load.ceu"
+
+#include "game.ceu"
+
+#include "menu.ceu"
+//function (_SDL_Rect a, _SDL_Rect b) => bool r do
+//    if
+
+par/or do
+    await SDL_QUIT;
+with
+    every SDL_REDRAW do
+        _SDL_SetRenderDrawColor(_REN, 0,0,0,0x00);
+        _SDL_RenderFillRect(_REN, null);
+    end
+with 
+    loop do
+       do Menu;
+       do Game;
+    end
+with
+    every SDL_REDRAW do
+        _SDL_RenderPresent(_REN);
+    end
+end
+
+escape 0;

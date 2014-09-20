@@ -1,0 +1,87 @@
+input int SDL_DT;
+class Enemy with
+    var _SDL_Rect col_box;
+    var int level; 
+do    
+    var int x0, y0, xf, yf;
+    var _SDL_Texture[] tex;
+    if _rand()%2 then
+        tex = _texENEMY1;        
+    else
+        tex = _texENEMY2;
+    end
+    var int tex_w,tex_h;
+    _SDL_QueryTexture(tex,null,null,&tex_w,&tex_h);
+
+    if _rand()%2 then
+        if _rand()%2 then 
+            x0 = 0; 
+            y0 = _rand()%WIN_H; 
+            xf = WIN_W;
+            yf = _rand()%WIN_H; 
+        else
+            x0 = _rand()%WIN_W; 
+            y0 = 0; 
+            xf = _rand()%WIN_W;
+            yf = WIN_H;
+        end
+    else
+        if _rand()%2 then 
+            x0 = WIN_W;
+            y0 = _rand()%WIN_H; 
+            xf = 0; 
+            yf = _rand()%WIN_H; 
+        else
+            x0 = _rand()%WIN_W; 
+            y0 = WIN_H;
+            xf = _rand()%WIN_W;
+            yf = 0; 
+        end
+    end
+
+    var _SDL_Rect clip;
+    clip.x = 0;
+    clip.y = 0;
+    clip.w = tex_w/2;
+    clip.h = tex_h;
+    
+    this.col_box.x = x0;
+    this.col_box.y = y0;
+    this.col_box.w = clip.w;
+    this.col_box.h = clip.h;
+    
+    var float x = x0;
+    var float y = y0;
+    var float vx = ((float) (xf - x0))/3000;
+    var float vy = ((float) (yf - y0))/3000;
+    par/or do
+         every SDL_REDRAW do
+            finalize 
+                _SDL_Surface* a = _rotozoomSurface(tex, 30, 1.0, 1);      with
+            _SDL_RenderCopy(_REN, a, &clip, &this.col_box);
+        end
+    with
+        var int ms;
+        every ms in SDL_DT do
+            x = x + vx*ms;
+            y = y + vy*ms;
+            this.col_box.x = x;
+            this.col_box.y = y;
+            if x > WIN_W or x < 0 or y > WIN_H or y < 0 then
+                break;
+            end
+        end
+    with
+        var bool walk_st; 
+        every 200ms do 
+            if walk_st then
+                clip.x = tex_w/2;
+            else
+                clip.x = 0;
+            end
+            walk_st = not walk_st;
+        end
+    end
+end
+
+

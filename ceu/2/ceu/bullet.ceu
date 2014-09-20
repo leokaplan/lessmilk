@@ -1,0 +1,37 @@
+class Bullet with
+    var _SDL_Rect col_box; 
+do
+    var int tex_w,tex_h;
+    _SDL_QueryTexture(_texPIXEL,null,null,&tex_w,&tex_h);
+
+    var _SDL_Rect clip;
+    clip.x = 0;
+    clip.y = 0;
+    clip.w = tex_w;
+    clip.h = tex_h;
+    
+    this.col_box.w = clip.w;
+    this.col_box.h = clip.h;
+    
+
+    par/or do
+        every SDL_REDRAW do
+            _SDL_RenderCopy(_REN,_texPIXEL, &clip,&this.col_box);
+        end
+    with
+        var float x,y,speed_x,speed_y;
+        x = col_box.x;
+        y = col_box.y;
+        var int dt;
+        every dt in SDL_DT do
+            y = y - 3;
+            if not(x > WIN_W or x < 0 or y > WIN_H or y < 0) then
+                this.col_box.y = y;
+            else
+                break;
+            end
+        end
+    end
+end
+
+

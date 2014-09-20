@@ -1,0 +1,25 @@
+input _SDL_MouseButtonEvent* SDL_MOUSEBUTTONDOWN; 
+
+class Menu with
+    event void ok;
+do
+    
+    var _SDL_Rect button;
+    button.w = WIN_W/8;
+    button.h = WIN_H/8;
+    button.y = button.h*4;
+    button.x = WIN_W/2 - button.w;
+    par/or do 
+        var _SDL_MouseButtonEvent* m; 
+        every m in SDL_MOUSEBUTTONDOWN do
+            if _SDL_Rect_vs_Mouse(&button,m) then
+                emit ok;
+            end
+        end
+    with
+        every SDL_REDRAW do
+            _SDL_SetRenderDrawColor(_REN,255,255,255,0x00);
+            _SDL_RenderFillRect(_REN,&button); 
+        end
+    end
+end	
