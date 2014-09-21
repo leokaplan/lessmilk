@@ -3,7 +3,7 @@ input _SDL_KeyboardEvent*    SDL_KEYDOWN;
 
 #include "player.ceu"
 #include "enemy.ceu"
-
+#include "enemy2.ceu"
 class Game with
     event void ok;
 do
@@ -12,13 +12,18 @@ do
     var int life = 3;
     var Player player;
     pool Enemy[10] enemies;
+    pool Enemy2[10] enemies2;
     par do
         every 1s do
             score = score + 1;
         end
     with
         every 500ms do
-            spawn Enemy in enemies;
+            if _rand()%2 then 
+                spawn Enemy in enemies;
+            else 
+                spawn Enemy2 in enemies2;
+            end
         end
     with
         var char[5] life_txt;
@@ -86,6 +91,9 @@ do
                 if _SDL_HasIntersection(&e:col_box,&player.col_box) then
                     life = life - 1;
                     emit e:ok;
+                    if life <0 then
+                        emit ok;
+                    end
                 else
                     loop (Bullet *)b in player.bullets do
                         if _SDL_HasIntersection(&e:col_box,&b:col_box) then
@@ -95,6 +103,15 @@ do
                     end
                 end
             end 
+            loop (Enemy2 *)e in enemies2 do
+                if _SDL_HasIntersection(&e:col_box,&player.col_box) then
+                    life = life - 1;
+                    emit e:ok;
+                    if life <0 then
+                        emit ok;
+                    end
+                end
+            end   
         end
     end
 end
