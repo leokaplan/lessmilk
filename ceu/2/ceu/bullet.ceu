@@ -1,5 +1,6 @@
 class Bullet with
     var _SDL_Rect col_box; 
+    event void ok;
 do
     var int tex_w,tex_h;
     _SDL_QueryTexture(_texFIRE,null,null,&tex_w,&tex_h);
@@ -31,6 +32,8 @@ do
                 break;
             end
         end
+    with
+        await ok;
     end
 end
 

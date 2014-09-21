@@ -1,6 +1,7 @@
 input int SDL_DT;
 class Enemy with
     var _SDL_Rect col_box;
+    event void ok;
 do    
     var int x0, y0, xf, yf;
     var int tex_w,tex_h;
@@ -36,6 +37,8 @@ do
                 break;
             end
         end
+    with
+        await ok;
     end
 end
 

@@ -1,6 +1,7 @@
 #include "bullet.ceu"
 class Player with
     var _SDL_Rect col_box; 
+    pool Bullet[5] bullets;
 do
     var int tex_w,tex_h;
     _SDL_QueryTexture(_texPLAYER,null,null,&tex_w,&tex_h);
@@ -29,7 +30,6 @@ do
         end
     with
         var float x,y,speed_x,speed_y;
-        pool Bullet[5] bullets;
         x = col_box.x;
         y = col_box.y;
         var int dt;
@@ -62,7 +62,7 @@ do
                 this.col_box.x = x;
                 this.col_box.y = y;
             end
-
+            
         end
     end
 end
