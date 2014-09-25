@@ -15,9 +15,12 @@ Game.Load.prototype = {
 	    game.stage.backgroundColor = '#2980b9';
 	    label = game.add.text(w/2, h/2, 'loading...', { font: '30px Arial', fill: '#fff' });
 		label.anchor.setTo(0.5, 0.5);
-
-		var thisdir = "file:///home/ceu/ceu-sdl/lessmilk/www.lessmilk.com/games/2";
-		game.load.image('bg', thisdir+'/images/bg.png');
+        
+        var path = document.location.pathname;
+        var dir = path.substring(0, path.lastIndexOf('/'));
+		
+		var thisdir = "file://" + dir;
+        game.load.image('bg', thisdir+'/images/bg.png');
 		game.load.image('player', thisdir+'/images/player.png');
 		game.load.image('fire', thisdir+'/images/fire.png');
 	    game.load.image('bonus', thisdir+'/images/bonus.png');
