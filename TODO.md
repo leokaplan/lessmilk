@@ -1,3 +1,24 @@
+Semana #3 (15/09 => 22/09)
+--------------------------
+
+### O que eu faria?
+
+* Farei rotações dinamicas nos inimigos usando sdl-gfx (em vez de salvar uma spritesheet com as rotações e carrega-las).
+
+* Vou começar a implementar o segundo jogo.
+
+### O que eu fiz?
+
+* Implementei parte do segundo jogo. 
+
+### O que eu farei?
+
+* Terminar as pendências:
+    * rotação do jogo 1: tentei usar a rotozoom mas não ficou bom. Vou continuar tentando.
+    * jogo 2: Falta o bonus e adequações gerais, como tamanho da tela e velocidades.
+    * em ambos: movimento usando o dt.
+
+
 Semana #2 (08/09 => 15/09)
 --------------------------
 
@@ -15,9 +36,7 @@ Semana #2 (08/09 => 15/09)
 
 ### O que eu farei?
 
-* Farei rotações dinamicas nos inimigos usando sdl-gfx (em vez de salvar uma spritesheet com as rotações e carrega-las).
 
-* Vou começar a implementar o segundo jogo.
 
 Semana #1 (01/09 => 08/09)
 --------------------------
