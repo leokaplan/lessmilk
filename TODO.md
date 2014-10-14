@@ -12,6 +12,33 @@ Semana #5 (29/09 => 06/10)
 
 ### O que eu fiz?
 
+   * Devido as provas não fiz as coisas, porém previ que aconteceria. Como acabaram minhas provas, devo conseguir compensar essas 2 semanas. 
+   
+### O que eu farei?
+
+* Terminar as pendências:
+    * rotação do jogo 1: tentei usar a rotozoom mas não ficou bom. Vou continuar tentando.
+    * jogo 2: adequações gerais, como tamanho da tela e velocidades.
+    * em ambos: movimento usando o dt.
+    
+* Começar o jogo 3
+* 
+
+
+Semana #5 (29/09 => 06/10)
+--------------------------
+
+### O que eu faria?
+
+* Terminar as pendências:
+    * rotação do jogo 1: tentei usar a rotozoom mas não ficou bom. Vou continuar tentando.
+    * jogo 2: adequações gerais, como tamanho da tela e velocidades.
+    * em ambos: movimento usando o dt.
+    
+* Começar o jogo 3
+
+### O que eu fiz?
+
    * Me atrapalhei com as provas e trabalhos, acabei não fazendo o combinado. 
    
 ### O que eu farei?
