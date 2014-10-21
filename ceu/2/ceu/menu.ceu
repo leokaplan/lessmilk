@@ -10,16 +10,22 @@ do
     button.y = button.h*4;
     button.x = WIN_W/2 - button.w;
     par/or do 
-        var _SDL_MouseButtonEvent* m; 
-        every m in SDL_MOUSEBUTTONDOWN do
-            if _SDL_Rect_vs_Mouse(&button,m) then
+        var int ms;
+        every ms in SDL_DT do
+            var u8* keyStates;
+            finalize
+                keyStates = _SDL_GetKeyboardState( null );
+            with 
+                nothing;
+            end
+            if keyStates[_SDL_SCANCODE_UP] then
                 emit ok;
             end
-        end
+        end 
     with
         every SDL_REDRAW do
-            _SDL_SetRenderDrawColor(_REN,255,255,255,0x00);
-            _SDL_RenderFillRect(_REN,&button); 
+            _SDL_SetRenderDrawColor(_REN,0,0,0,0x00);
+            _SDL_RenderCopy(_REN,_texLOAD,null,null);
         end
     end
 end	

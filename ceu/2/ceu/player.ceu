@@ -1,8 +1,11 @@
 #include "bullet.ceu"
 class Player with
     var _SDL_Rect col_box; 
-    pool Bullet[5] bullets;
+    pool Bullet[9] bullets;
+    event void levelup;
+    event void hit;
 do
+    var int bonus = 1;
     var int tex_w,tex_h;
     _SDL_QueryTexture(_texPLAYER,null,null,&tex_w,&tex_h);
 
@@ -29,11 +32,22 @@ do
             weapon_cooldown = true;
         end
     with
+        every hit do
+            bonus = 1;
+        end
+    with
+        every levelup do
+            bonus = bonus + 1;
+            if bonus == 4 then
+                bonus = 3;
+            end
+        end
+    with
         var float x,y,speed_x,speed_y;
         x = col_box.x;
         y = col_box.y;
-        var int dt;
-        every dt in SDL_DT do
+        var int ms;
+        every ms in SDL_DT do
             speed_x = 0;
             speed_y = 0;
             var u8* keyStates;
@@ -44,25 +58,54 @@ do
             end
             if keyStates[_SDL_SCANCODE_UP] and weapon_cooldown then
                 speed_x = 0;
-                spawn Bullet in bullets with
-                    this.col_box.x = col_box.x+col_box.w/2; 
-                    this.col_box.y = col_box.y; 
-                end;
+                
+                if bonus == 1 then
+                    spawn Bullet in bullets with
+                        this.col_box.x = col_box.x+col_box.w/2; 
+                        this.col_box.y = col_box.y; 
+                    end;
+                else/if bonus == 2 then
+                    spawn Bullet in bullets with
+                        this.col_box.x = col_box.x+col_box.w/4; 
+                        this.col_box.y = col_box.y; 
+                    end;
+                    spawn Bullet in bullets with
+                        this.col_box.x = col_box.x+3*col_box.w/4; 
+                        this.col_box.y = col_box.y; 
+                    end;
+                else/if bonus == 3 then
+                    spawn Bullet in bullets with
+                        this.col_box.x = col_box.x+col_box.w/4; 
+                        this.col_box.y = col_box.y; 
+                    end;
+                    spawn Bullet in bullets with
+                        this.col_box.x = col_box.x+col_box.w/2; 
+                        this.col_box.y = col_box.y; 
+                    end;
+                    spawn Bullet in bullets with
+                        this.col_box.x = col_box.x+3*col_box.w/4; 
+                        this.col_box.y = col_box.y; 
+                    end;
+                end    
+                
                 weapon_cooldown = false;
             else/if keyStates[_SDL_SCANCODE_RIGHT] then
-                speed_x = 300;
-                speed_y = 0;
+                x = x + 0.3*ms;
+                //speed_x;
+                //speed_x = 0.3*ms;
+                speed_y = 0*ms;
             else/if keyStates[_SDL_SCANCODE_LEFT] then
-                speed_x = -300;
-                speed_y = 0;
+                x = x -1*0.3*ms;
+                speed_y = 0*ms;
             end
-            x = x + speed_x/100;
-            y = y + speed_y/100;
+            //x = x + speed_x;
+            y = y + speed_y;
             if not(x > WIN_W-clip.w or x < 0 or y > WIN_H or y < 0) then
                 this.col_box.x = x;
                 this.col_box.y = y;
             end
-            
+            x = this.col_box.x; 
+            y = this.col_box.y; 
         end
     end
 end

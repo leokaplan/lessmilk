@@ -4,6 +4,7 @@ input _SDL_KeyboardEvent*    SDL_KEYDOWN;
 #include "player.ceu"
 #include "enemy.ceu"
 #include "enemy2.ceu"
+#include "bonus.ceu"
 class Game with
     event void ok;
 do
@@ -13,7 +14,12 @@ do
     var Player player;
     pool Enemy[10] enemies;
     pool Enemy2[10] enemies2;
+    pool Bonus[3] bonuses;
     par do
+         every 3s do
+            spawn Bonus in bonuses;
+        end
+    with
         every 1s do
             score = score + 1;
         end
@@ -91,6 +97,7 @@ do
                 if _SDL_HasIntersection(&e:col_box,&player.col_box) then
                     life = life - 1;
                     emit e:ok;
+                    emit player.hit;
                     if life <0 then
                         emit ok;
                     end
@@ -103,10 +110,17 @@ do
                     end
                 end
             end 
-            loop (Enemy2 *)e in enemies2 do
+           loop (Bonus *)b in bonuses do
+                if _SDL_HasIntersection(&b:col_box,&player.col_box) then
+                    emit player.levelup;
+                    emit b:ok;
+                end
+            end   
+           loop (Enemy2 *)e in enemies2 do
                 if _SDL_HasIntersection(&e:col_box,&player.col_box) then
-                    life = life - 1;
+                    emit player.hit;
                     emit e:ok;
+                    life = life - 1;
                     if life <0 then
                         emit ok;
                     end

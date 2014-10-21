@@ -6,6 +6,8 @@ native do
     SDL_Texture* texENEMY;
     SDL_Texture* texENEMY2;
     SDL_Texture* texFIRE;
+    SDL_Texture* texBONUS;
+    SDL_Texture* texLOAD;
     TTF_Font* fnt;
 end
     
@@ -14,6 +16,8 @@ end
     load( _texPIXEL , "../images/pixel.png" );
     load( _texENEMY , "../images/enemy.png" );
     load( _texENEMY2 , "../images/bullet.png" );
+    load( _texBONUS , "../images/bonus.png" );
+    load( _texLOAD , "../images/bg.png" );
     _TTF_Init();
     finalize with
         _TTF_Quit();

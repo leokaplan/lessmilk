@@ -1,11 +1,11 @@
 input int SDL_DT;
-class Enemy with
+class Enemy2 with
     var _SDL_Rect col_box;
     event void ok;
 do    
     var int x0, y0, xf, yf;
     var int tex_w,tex_h;
-    _SDL_QueryTexture(_texENEMY,null,null,&tex_w,&tex_h);
+    _SDL_QueryTexture(_texENEMY2,null,null,&tex_w,&tex_h);
 
     x0 = _rand()%WIN_W; 
     var int x  = x0;
@@ -26,7 +26,7 @@ do
          every SDL_REDRAW do
                 //var _SDL_Surface* a = _rotozoomSurface(tex, 30, 1.0, 1);      
                  //_SDL_RenderCopy(_REN, a, &clip, &this.col_box);
-            _SDL_RenderCopy(_REN,_texENEMY, &clip,&this.col_box);
+            _SDL_RenderCopy(_REN,_texENEMY2, &clip,&this.col_box);
         end
     with
         var int ms;

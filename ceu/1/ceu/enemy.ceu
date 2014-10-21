@@ -1,3 +1,4 @@
+
 input int SDL_DT;
 class Enemy with
     var _SDL_Rect col_box;
@@ -54,9 +55,18 @@ do
     var float y = y0;
     var float vx = ((float) (xf - x0))/3000;
     var float vy = ((float) (yf - y0))/3000;
+    var float angle;
+    angle = 180.0*_asin(vx/vy)/3.14;
     par/or do
-         every SDL_REDRAW do
-            _SDL_RenderCopy(_REN, tex, &clip, &this.col_box);
+        every SDL_REDRAW do
+               _SDL_RenderCopy(_REN, tex, &clip, &this.col_box); 
+            /*
+            finalize 
+               _SDL_RenderCopyEx(_REN, tex, &clip, &this.col_box,angle,null,_SDL_FLIP_NONE); 
+            with
+               nothing; 
+            end
+            //*/
         end
     with
         var int ms;

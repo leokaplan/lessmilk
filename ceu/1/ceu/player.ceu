@@ -60,8 +60,8 @@ do
             else
                 clip.x = 0;
             end
-            x = x + speed_x/100;
-            y = y + speed_y/100;
+            x = x + dt*speed_x/1000;
+            y = y + dt*speed_y/1000;
             if not(x > WIN_W or x < 0 or y > WIN_H or y < 0) then
                 this.col_box.x = x;
                 this.col_box.y = y;

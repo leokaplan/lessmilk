@@ -1,9 +1,9 @@
-class Bullet with
+class Bonus with
     var _SDL_Rect col_box; 
     event void ok;
 do
     var int tex_w,tex_h;
-    _SDL_QueryTexture(_texFIRE,null,null,&tex_w,&tex_h);
+    _SDL_QueryTexture(_texBONUS,null,null,&tex_w,&tex_h);
 
     var _SDL_Rect clip;
     clip.x = 0;
@@ -17,17 +17,18 @@ do
 
     par/or do
         every SDL_REDRAW do
-            _SDL_RenderCopy(_REN,_texFIRE, &clip,&this.col_box);
+            _SDL_RenderCopy(_REN,_texBONUS, &clip,&this.col_box);
         end
     with
         var float x,y,speed_x,speed_y;
-        x = col_box.x;
-        y = col_box.y;
+        x = _rand()%WIN_W;//col_box.x;
+        y = 1;//col_box.y;
         var int ms;
         every ms in SDL_DT do
-            y = y - 0.3*ms;
+            y = y + 0.3*ms;
             if not(x > WIN_W or x < 0 or y > WIN_H or y < 0) then
                 this.col_box.y = y;
+                this.col_box.x = x;
             else
                 break;
             end

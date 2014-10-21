@@ -3,12 +3,12 @@
 input void SDL_REDRAW;
 input void SDL_QUIT;
 
-#define WIN_W 640
-#define WIN_H 480
+#define WIN_H 500 
+#define WIN_W 300
 
 var _SDL_Window* win;
     finalize
-        win = _SDL_CreateWindow("Lessmilk 2", 640, 480,WIN_W , WIN_H, _SDL_WINDOW_SHOWN);
+        win = _SDL_CreateWindow("Lessmilk 2", _SDL_WINDOWPOS_CENTERED,_SDL_WINDOWPOS_CENTERED,WIN_W , WIN_H, _SDL_WINDOW_SHOWN);
     with
         _SDL_DestroyWindow(win);
     end

@@ -11,6 +11,7 @@ do
     button.x = WIN_W/2 - button.w;
     par/or do 
         var _SDL_MouseButtonEvent* m; 
+        _printf("a");
         every m in SDL_MOUSEBUTTONDOWN do
             if _SDL_Rect_vs_Mouse(&button,m) then
                 emit ok;
