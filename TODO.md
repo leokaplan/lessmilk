@@ -1,4 +1,25 @@
-Semana #5 (06/10 => 13/10)
+
+Semana #7 (13/10 => 20/10)
+--------------------------
+
+### O que eu faria?
+
+* Terminar as pendências:
+    * rotação do jogo 1: tentei usar a rotozoom mas não ficou bom. Vou continuar tentando.
+    * jogo 2: adequações gerais, como tamanho da tela e velocidades.
+    * em ambos: movimento usando o dt.
+    
+* Começar o jogo 3
+
+### O que eu fiz?
+
+  * Terminei as pendências
+   
+### O que eu farei?
+
+* jogo 3
+
+Semana #6 (06/10 => 13/10)
 --------------------------
 
 ### O que eu faria?
