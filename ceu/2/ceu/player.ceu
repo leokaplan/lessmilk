@@ -1,7 +1,7 @@
 #include "bullet.ceu"
 class Player with
     var _SDL_Rect col_box; 
-    pool Bullet[9] bullets;
+    pool Bullet[] bullets;
     event void levelup;
     event void hit;
 do
@@ -59,34 +59,11 @@ do
             if keyStates[_SDL_SCANCODE_UP] and weapon_cooldown then
                 speed_x = 0;
                 
-                if bonus == 1 then
                     spawn Bullet in bullets with
                         this.col_box.x = col_box.x+col_box.w/2; 
                         this.col_box.y = col_box.y; 
+                        this.size = bonus;
                     end;
-                else/if bonus == 2 then
-                    spawn Bullet in bullets with
-                        this.col_box.x = col_box.x+col_box.w/4; 
-                        this.col_box.y = col_box.y; 
-                    end;
-                    spawn Bullet in bullets with
-                        this.col_box.x = col_box.x+3*col_box.w/4; 
-                        this.col_box.y = col_box.y; 
-                    end;
-                else/if bonus == 3 then
-                    spawn Bullet in bullets with
-                        this.col_box.x = col_box.x+col_box.w/4; 
-                        this.col_box.y = col_box.y; 
-                    end;
-                    spawn Bullet in bullets with
-                        this.col_box.x = col_box.x+col_box.w/2; 
-                        this.col_box.y = col_box.y; 
-                    end;
-                    spawn Bullet in bullets with
-                        this.col_box.x = col_box.x+3*col_box.w/4; 
-                        this.col_box.y = col_box.y; 
-                    end;
-                end    
                 
                 weapon_cooldown = false;
             else/if keyStates[_SDL_SCANCODE_RIGHT] then

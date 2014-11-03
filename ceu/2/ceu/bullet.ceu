@@ -1,23 +1,50 @@
 class Bullet with
     var _SDL_Rect col_box; 
     event void ok;
+    var int size;
 do
     var int tex_w,tex_h;
     _SDL_QueryTexture(_texFIRE,null,null,&tex_w,&tex_h);
-
-    var _SDL_Rect clip;
-    clip.x = 0;
-    clip.y = 0;
-    clip.w = tex_w;
-    clip.h = tex_h;
     
-    this.col_box.w = clip.w;
-    this.col_box.h = clip.h;
+    var _SDL_Rect[3] clips;
+
+    clips[0].x = col_box.x - tex_w*1.5;
+    clips[0].y = col_box.y;
+    clips[0].w = tex_w;
+    clips[0].h = tex_h;
+
+    clips[1].x = col_box.x;
+    clips[1].y = col_box.y;
+    clips[1].w = tex_w;
+    clips[1].h = tex_h;
+    
+    clips[2].x = col_box.x + tex_w*1.5;
+    clips[2].y = col_box.y;
+    clips[2].w = tex_w;
+    clips[2].h = tex_h;
+    
+    col_box.h = tex_h;
     
 
     par/or do
         every SDL_REDRAW do
-            _SDL_RenderCopy(_REN,_texFIRE, &clip,&this.col_box);
+            if size == 1 then
+                col_box.w = tex_w;
+                _SDL_RenderCopy(_REN,_texFIRE, null,&clips[1]);
+            end  
+            if size == 2 then
+                col_box.x = clips[0].x;
+                col_box.w = clips[2].x-clips[0].x;
+                _SDL_RenderCopy(_REN,_texFIRE, null,&clips[0]);
+                _SDL_RenderCopy(_REN,_texFIRE, null,&clips[2]);
+            end  
+            if size == 3 then
+                col_box.x = clips[0].x;
+                col_box.w = clips[2].x-clips[0].x;
+                _SDL_RenderCopy(_REN,_texFIRE, null,&clips[0]);
+                _SDL_RenderCopy(_REN,_texFIRE, null,&clips[1]);
+                _SDL_RenderCopy(_REN,_texFIRE, null,&clips[2]);
+            end  
         end
     with
         var float x,y,speed_x,speed_y;
@@ -28,6 +55,9 @@ do
             y = y - 0.3*ms;
             if not(x > WIN_W or x < 0 or y > WIN_H or y < 0) then
                 this.col_box.y = y;
+                clips[0].y = y;
+                clips[1].y = y;
+                clips[2].y = y;
             else
                 break;
             end
