@@ -1,4 +1,38 @@
+Semana #10 (3/10 => 10/10)
+--------------------------
 
+### O que eu faria?
+* Jogo 3
+
+### O que eu fiz?
+
+### O que eu farei?
+* Jogo 3
+* Lui
+Semana #9 (27/10 => 3/10)
+--------------------------
+
+### O que eu faria?
+
+* jogo 3
+
+### O que eu fiz?
+
+   
+### O que eu farei?
+* jogo 3
+Semana #8 (20/10 => 27/10)
+--------------------------
+
+### O que eu faria?
+
+* jogo 3
+
+### O que eu fiz?
+
+
+### O que eu farei?
+* jogo 3
 Semana #7 (13/10 => 20/10)
 --------------------------
 
