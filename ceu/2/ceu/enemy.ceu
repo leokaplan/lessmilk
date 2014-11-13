@@ -1,4 +1,5 @@
 input int SDL_DT;
+
 class Enemy with
     var _SDL_Rect col_box;
     event void ok;

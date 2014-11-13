@@ -23,6 +23,10 @@ with
     _SDL_DestroyRenderer(_REN);
 end
 
+native do
+    ##include <time.h>
+end
+_srand(_time(null));
    
 #include "load.ceu"
 
@@ -36,7 +40,7 @@ par/or do
     await SDL_QUIT;
 with
     every SDL_REDRAW do
-        _SDL_SetRenderDrawColor(_REN, 0,0,0,0x00);
+        _SDL_SetRenderDrawColor(_REN, 0,0,0,0xFF);
         _SDL_RenderFillRect(_REN, null);
     end
 with 
@@ -44,10 +48,12 @@ with
        do Menu;
        do Game;
     end
+#ifndef CEU_TIMEMACHINE
 with
     every SDL_REDRAW do
         _SDL_RenderPresent(_REN);
     end
+#endif
 end
 
 escape 0;

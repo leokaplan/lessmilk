@@ -1,3 +1,5 @@
+#include "keys.ceu"
+
 class Player with
     var _SDL_Rect col_box; 
 do
@@ -15,9 +17,9 @@ do
     this.col_box.w = clip.w;
     this.col_box.h = clip.h;
     
-    var _SDL_KeyboardEvent* key;
     var bool walk_st;
-    par/and do
+
+    par do
          every SDL_REDRAW do
             _SDL_RenderCopy(_REN,_texPLAYER, &clip,&this.col_box);
         end
@@ -26,29 +28,24 @@ do
         x = WIN_W/2;
         y = WIN_H/2;
         var int dt;
+        var Keys keys;
         every dt in SDL_DT do
             speed_x = 0;
             speed_y = 0;
             walk_st = not walk_st;
-            var u8* keyStates;
-            finalize
-                keyStates = _SDL_GetKeyboardState( null );
-            with
-                nothing;
-            end
-            if keyStates[_SDL_SCANCODE_DOWN] then
+            if keys.k_down then
                 speed_x = 0;
                 speed_y = 300;
                 clip.y = 0*clip.h;
-            else/if keyStates[_SDL_SCANCODE_UP] then
+            else/if keys.k_up then
                 speed_x = 0;
                 speed_y = -300;
                 clip.y = 2*clip.h;
-            else/if keyStates[_SDL_SCANCODE_RIGHT] then
+            else/if keys.k_right then
                 speed_x = 300;
                 speed_y = 0;
                 clip.y = 1*clip.h;
-            else/if keyStates[_SDL_SCANCODE_LEFT] then
+            else/if keys.k_left then
                 speed_x = -300;
                 speed_y = 0;
                 clip.y = 3*clip.h;
