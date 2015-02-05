@@ -1,0 +1,32 @@
+#define load(tex,path) finalize tex = _IMG_LoadTexture(_REN, path); with _SDL_DestroyTexture(tex); end _assert(tex != null); 
+
+native do
+    SDL_Texture* texPLAYER;
+    SDL_Texture* texPIXEL;
+    SDL_Texture* texENEMY;
+    SDL_Texture* texENEMY2;
+    SDL_Texture* texFIRE;
+    SDL_Texture* texBONUS;
+    SDL_Texture* texLOAD;
+    TTF_Font* fnt;
+end
+    
+    load( _texPLAYER , "../images/cube.png" );
+    load( _texFIRE , "../images/fire.png" );
+    load( _texPIXEL , "../images/pixel.png" );
+    load( _texENEMY , "../images/enemy.png" );
+    load( _texENEMY2 , "../images/bullet.png" );
+    load( _texBONUS , "../images/bonus.png" );
+    load( _texLOAD , "../images/bg.png" );
+    _TTF_Init();
+    finalize with
+        _TTF_Quit();
+    end
+    finalize
+        _fnt = _TTF_OpenFont("../fonts/Deutsch.ttf", 40);
+    with
+        _TTF_CloseFont(_fnt);
+    end
+
+
+

@@ -1,7 +1,5 @@
-#include "bullet.ceu"
 class Player with
     var _SDL_Rect col_box; 
-    pool Bullet[] bullets;
     event void levelup;
     event void hit;
 do
@@ -15,7 +13,7 @@ do
     clip.w = tex_w;
     clip.h = tex_h;
     
-    this.col_box.x = WIN_W/2;
+    this.col_box.x = 0;
     this.col_box.y = WIN_H-clip.h;
     this.col_box.w = clip.w;
     this.col_box.h = clip.h;
@@ -43,13 +41,13 @@ do
             end
         end
     with
-        var float x,y,speed_x,speed_y;
+        var float x,y,speed_x,speed_y,gravity;
+        gravity = 0.03;
         x = col_box.x;
         y = col_box.y;
         var int ms;
         every ms in SDL_DT do
-            speed_x = 0;
-            speed_y = 0;
+            speed_x = 0.3*ms;
             x = this.col_box.x; 
             y = this.col_box.y; 
             var u8* keyStates;
@@ -58,33 +56,23 @@ do
             with
                 nothing;
             end
-            if keyStates[_SDL_SCANCODE_UP] and weapon_cooldown then
-                speed_x = 0;
-                
-                    spawn Bullet in bullets with
-                        this.col_box.x = col_box.x+col_box.w/2; 
-                        this.col_box.y = col_box.y; 
-                        this.size = bonus;
-                    end;
-                
-                weapon_cooldown = false;
-            else/if keyStates[_SDL_SCANCODE_RIGHT] then
-                //x = x + 0.3*ms;
-                _printf("r");
+            if keyStates[_SDL_SCANCODE_SPACE] then
+               speed_y = speed_y - 0.05*ms; 
                 //speed_x;
-                speed_x = 0.3*ms;
-                speed_y = 0*ms;
-            else/if keyStates[_SDL_SCANCODE_LEFT] then
-                speed_x = -0.3*ms;
-                _printf("l");
-                speed_y = 0*ms;
             end
-            _printf("%f %f %f %d\n",x,speed_x,x+speed_x,ms);
+//            _printf("%f %f %f\n",y,speed_y, gravity);
             x = x + speed_x;
             y = y + speed_y;
-            if not(x > WIN_W-clip.w or x < 0 or y > WIN_H or y < 0) then
+            speed_y = speed_y + gravity*ms;
+            if not(x > WIN_W-clip.w or x < 0) then
                 this.col_box.x = x;
+            else
+                speed_x = 0;
+            end
+            if not(y > WIN_H-clip.h or y < 0) then
                 this.col_box.y = y;
+            else
+                speed_y = 0;
             end
         end
     end
