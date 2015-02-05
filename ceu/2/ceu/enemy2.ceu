@@ -1,3 +1,6 @@
+/// TODO: essa classe so e' diferente da outra pelo tex?
+///       passar tex no construtor e apagar essa classe
+
 input int SDL_DT;
 class Enemy2 with
     var _SDL_Rect col_box;

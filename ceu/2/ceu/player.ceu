@@ -1,7 +1,9 @@
+#include "keys.ceu"
 #include "bullet.ceu"
+
 class Player with
-    var _SDL_Rect col_box; 
-    pool Bullet[] bullets;
+    var _SDL_Rect col_box;
+    pool Bullet[5] bullets;
     event void levelup;
     event void hit;
 do
@@ -47,9 +49,11 @@ do
         x = col_box.x;
         y = col_box.y;
         var int ms;
+        var Keys keys;
         every ms in SDL_DT do
             speed_x = 0;
             speed_y = 0;
+<<<<<<< HEAD
             x = this.col_box.x; 
             y = this.col_box.y; 
             var u8* keyStates;
@@ -59,24 +63,37 @@ do
                 nothing;
             end
             if keyStates[_SDL_SCANCODE_UP] and weapon_cooldown then
+=======
+            if keys.k_up and weapon_cooldown then
+>>>>>>> f2fb2a2ca5f4e0c9b75c5f4cde4f7c203a870822
                 speed_x = 0;
                 
-                    spawn Bullet in bullets with
-                        this.col_box.x = col_box.x+col_box.w/2; 
-                        this.col_box.y = col_box.y; 
-                        this.size = bonus;
-                    end;
+                spawn Bullet in bullets with
+                    this.col_box.x = col_box.x+col_box.w/2;
+                    this.col_box.y = col_box.y;
+                    this.size = bonus;
+                end;
                 
                 weapon_cooldown = false;
+<<<<<<< HEAD
             else/if keyStates[_SDL_SCANCODE_RIGHT] then
                 //x = x + 0.3*ms;
                 _printf("r");
+=======
+            else/if keys.k_right then
+                x = x + 0.3*ms;
+>>>>>>> f2fb2a2ca5f4e0c9b75c5f4cde4f7c203a870822
                 //speed_x;
                 speed_x = 0.3*ms;
                 speed_y = 0*ms;
+<<<<<<< HEAD
             else/if keyStates[_SDL_SCANCODE_LEFT] then
                 speed_x = -0.3*ms;
                 _printf("l");
+=======
+            else/if keys.k_left then
+                x = x -1*0.3*ms;
+>>>>>>> f2fb2a2ca5f4e0c9b75c5f4cde4f7c203a870822
                 speed_y = 0*ms;
             end
             _printf("%f %f %f %d\n",x,speed_x,x+speed_x,ms);

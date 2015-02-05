@@ -37,6 +37,7 @@ do
         var char[5] score_txt;
         var int  score_size = 0;
         every SDL_REDRAW do
+            native @nohold _sprintf();
             score_size = _sprintf(score_txt,"%d",score); 
             var _SDL_Texture* score_tex;
             var _SDL_Rect score_r;

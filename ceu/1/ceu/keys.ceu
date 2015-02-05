@@ -1,0 +1,30 @@
+#ifndef _KEYS_CEU
+#define _KEYS_CEU
+
+input _SDL_KeyboardEvent* SDL_KEYDOWN;
+input _SDL_KeyboardEvent* SDL_KEYUP;
+
+class Keys with
+    var bool k_down, k_up, k_right, k_left;
+do
+    #define KEY(VAR,KEY)                                        \
+        var _SDL_KeyboardEvent[] key;                            \
+        loop do                                                 \
+            VAR = false;                                        \
+            key = await SDL_KEYDOWN until key:keysym.sym==KEY;  \
+            VAR = true;                                         \
+            key = await SDL_KEYUP   until key:keysym.sym==KEY;  \
+        end
+
+    par do
+        KEY(k_down,  _SDLK_DOWN);
+    with
+        KEY(k_up,    _SDLK_UP);
+    with
+        KEY(k_left,  _SDLK_LEFT);
+    with
+        KEY(k_right, _SDLK_RIGHT);
+    end
+end
+
+#endif

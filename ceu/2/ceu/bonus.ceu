@@ -1,3 +1,6 @@
+/// TODO: mesma coisa que enemy2. Essa classe nao precisa existir.
+///       pode passar outro parametro dizendo se eh "amigo" ou nao.
+
 class Bonus with
     var _SDL_Rect col_box; 
     event void ok;

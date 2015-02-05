@@ -1,5 +1,5 @@
-
 input int SDL_DT;
+
 class Enemy with
     var _SDL_Rect col_box;
     var int level; 
@@ -66,7 +66,7 @@ do
             with
                nothing; 
             end
-            //*/
+            */
         end
     with
         var int ms;

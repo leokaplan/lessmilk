@@ -35,6 +35,7 @@ do
         end
     with
         every SDL_REDRAW do
+            native @nohold _sprintf();
             score_size = _sprintf(score_txt,"%d",score); 
             var _SDL_Texture* str_tex;
             var _SDL_Rect str_r;
@@ -48,6 +49,9 @@ do
             str_r.w = 10*score_size;
             str_r.h = 20;
 
+/// TODO: cria e destroy o texto a cada frame!
+/// opcao: criar todos os algarismos em um vetor [0..9] em "load.ceu"
+///        e aqui fazer apenas o "RenderCopy" com o valor corrente
             var _SDL_Surface* sfc;
             finalize
                 sfc = _TTF_RenderText_Blended(_fnt, score_txt, clr);
