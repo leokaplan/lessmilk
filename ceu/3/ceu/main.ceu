@@ -1,4 +1,5 @@
 #include "sdl.ceu"
+#include "c.ceu"
 
 input void SDL_REDRAW;
 input void SDL_QUIT;
@@ -8,7 +9,7 @@ input void SDL_QUIT;
 
 var _SDL_Window* win;
     finalize
-        win = _SDL_CreateWindow("Lessmilk 2", _SDL_WINDOWPOS_CENTERED,_SDL_WINDOWPOS_CENTERED,WIN_W , WIN_H, _SDL_WINDOW_SHOWN);
+        win = _SDL_CreateWindow("Lessmilk 3", _SDL_WINDOWPOS_CENTERED,_SDL_WINDOWPOS_CENTERED,WIN_W , WIN_H, _SDL_WINDOW_SHOWN);
     with
         _SDL_DestroyWindow(win);
     end

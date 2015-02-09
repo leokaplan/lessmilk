@@ -2,12 +2,21 @@ input int SDL_DT;
 class Enemy with
     var _SDL_Rect col_box;
     event void ok;
+    var int type;
+    var int pos;
 do    
     var int x0, y0, xf, yf;
     var int tex_w,tex_h;
-    _SDL_QueryTexture(_texENEMY,null,null,&tex_w,&tex_h);
+    if type == 1 then
+    else/if type == 2 then
+    else/if type == 3 then
+    else/if type == 4 then
+    else/if type == 5 then
+    end
+   
 
-    x0 = _rand()%WIN_W; 
+    _SDL_QueryTexture(_texENEMY,null,null,&tex_w,&tex_h);
+    x0 = pos*tex_w; 
     var int x  = x0;
     y0 = 1;
     var _SDL_Rect clip;

@@ -1,93 +1,24 @@
+input _SDL_MouseButtonEvent* SDL_MOUSEBUTTONDOWN; 
 input int SDL_DT;
-input _SDL_KeyboardEvent*    SDL_KEYDOWN;
-
-#include "player.ceu"
-#include "enemy.ceu"
+#include "level.ceu"
 class Game with
     event void ok;
 do
-    var int score = 0;
-    var int level = 0;
-    var int life = 3;
-    var Player player;
-    pool Enemy[10] enemies;
-    par do
-        every 1s do
-            score = score + 1;
-        end
-    with
-        var char[5] life_txt;
-        var int  life_size = 0;
-        var char[5] score_txt;
-        var int  score_size = 0;
-        every SDL_REDRAW do
-            score_size = _sprintf(score_txt,"%d",score); 
-            var _SDL_Texture* score_tex;
-            var _SDL_Rect score_r;
-            var _SDL_Color score_clr;
-                score_clr.r = 255;
-                score_clr.g = 255;
-                score_clr.b = 255;
-            
-            score_r.x = 10;
-            score_r.y = 10;
-            score_r.w = 10*score_size;
-            score_r.h = 20;
-
-            var _SDL_Surface* score_sfc;
-            finalize
-                score_sfc = _TTF_RenderText_Blended(_fnt, score_txt, score_clr);
-            with
-                _SDL_FreeSurface(score_sfc);
-            end
-            finalize
-                score_tex = _SDL_CreateTextureFromSurface(_REN, score_sfc);
-            with
-                _SDL_DestroyTexture(score_tex);
-            end
-            _SDL_RenderCopy(_REN, score_tex, null, &score_r);
-            
-            
-            life_size = _sprintf(life_txt,"%d",life); 
-            var _SDL_Texture* life_tex;
-            var _SDL_Rect life_r;
-            var _SDL_Color life_clr;
-                life_clr.r = 255;
-                life_clr.g = 255;
-                life_clr.b = 255;
-            
-            life_r.x = WIN_W - 10*life_size;
-            life_r.y = 10;
-            life_r.w = 10*life_size;
-            life_r.h = 20;
-
-            var _SDL_Surface* life_sfc;
-            finalize
-                life_sfc = _TTF_RenderText_Blended(_fnt, life_txt, life_clr);
-            with
-                _SDL_FreeSurface(life_sfc);
-            end
-            finalize
-                life_tex = _SDL_CreateTextureFromSurface(_REN, life_sfc);
-            with
-                _SDL_DestroyTexture(life_tex);
-            end
-            _SDL_RenderCopy(_REN, life_tex, null, &life_r);
-        end
-    with
-        var int ms;
-        every ms in SDL_DT do
-            loop (Enemy *)e in enemies do
-                if _SDL_HasIntersection(&e:col_box,&player.col_box) then
-                    life = life - 1;
-                    emit e:ok;
-                    emit player.hit;
-                    if life <0 then
-                        emit ok;
-                    end
-                end
-            end 
+    //l=0
+    //spawn level with level = l end
+    //l ++
+    var int actual = 0;
+    var Level leveL with
+        this.level = actual;
+    end;
+    await FOREVER;
+    
+        /*
+    every level.ok do
+        actual++;
+        spawn Level in levels with
+            this.level = actual;
         end
     end
-end
-	
+        */
+end	

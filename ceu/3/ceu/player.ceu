@@ -19,6 +19,7 @@ do
     this.col_box.h = clip.h;
     
     var _SDL_KeyboardEvent* key;
+    _printf("player\n");
 
     var bool weapon_cooldown;
     par/and do
@@ -69,6 +70,7 @@ do
             else
                 speed_x = 0;
             end
+//            _printf("%d\n",this.col_box.x);
             if not(y > WIN_H-clip.h or y < 0) then
                 this.col_box.y = y;
             else
