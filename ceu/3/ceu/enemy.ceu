@@ -18,7 +18,6 @@ do
     _SDL_QueryTexture(_texENEMY,null,null,&tex_w,&tex_h);
     x0 = pos*tex_w; 
     var int x  = x0;
-    y0 = 1;
     var _SDL_Rect clip;
     clip.x = 0;
     clip.y = 0;
@@ -26,29 +25,16 @@ do
     clip.h = tex_h;
     
     this.col_box.x = x0;
-    this.col_box.y = y0;
+    this.col_box.y = WIN_H - clip.h;
     this.col_box.w = clip.w;
     this.col_box.h = clip.h;
     
     var float y = y0;
-    par/or do
          every SDL_REDRAW do
                 //var _SDL_Surface* a = _rotozoomSurface(tex, 30, 1.0, 1);      
                  //_SDL_RenderCopy(_REN, a, &clip, &this.col_box);
             _SDL_RenderCopy(_REN,_texENEMY, &clip,&this.col_box);
         end
-    with
-        var int ms;
-        every ms in SDL_DT do
-            y = y + 0.3*ms;
-            this.col_box.y = y;
-            if x > WIN_W or x < 0 or y > WIN_H or y < 0 then
-                break;
-            end
-        end
-    with
-        await ok;
-    end
 end
 
 

@@ -33,6 +33,8 @@ do
     with
         every hit do
             bonus = 1;
+            // menos uma vida
+            col_box.x = 0;
         end
     with
         every levelup do
