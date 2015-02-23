@@ -1,3 +1,21 @@
+Semana #11 (23/2 => 30/2)
+--------------------------
+
+### O que eu faria?
+* Jogo 3
+* Lui
+
+### O que eu fiz?
+
+* Jogo 3 quase pronto
+* Lui pronto
+
+### O que eu farei?
+
+* subirei o Lui para o GH, talvez fazer alguma adição
+* farei a rotação do quadrado para o jogo 3
+* lerei o "Structural Analysis for Simple Games Source Codes Applied to Programming Learning"
+
 Semana #10 (3/10 => 10/10)
 --------------------------
 
