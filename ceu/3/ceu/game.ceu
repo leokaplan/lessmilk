@@ -7,12 +7,21 @@ do
     //l=0
     //spawn level with level = l end
     //l ++
+    var int tries = 0;
     var int actual = 0;
-    var Level leveL with
-        this.level = actual;
-    end;
+    loop do
+        var Level leveL with
+            this.level = actual;
+        end;
+        par/or do
+            await leveL.ok;
+            actual = actual + 1;
+        with
+            await leveL.die;
+            tries = tries + 1;
+        end
+    end
     await FOREVER;
-    
         /*
     every level.ok do
         actual++;

@@ -2,6 +2,7 @@ class Player with
     var _SDL_Rect col_box; 
     event void levelup;
     event void hit;
+    event void ok;
 do
     var int bonus = 1;
     var int tex_w,tex_h;
@@ -71,6 +72,7 @@ do
                 this.col_box.x = x;
             else
                 speed_x = 0;
+                emit ok;
             end
 //            _printf("%d\n",this.col_box.x);
             if not(y > WIN_H-clip.h or y < 0) then
