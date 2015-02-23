@@ -7,6 +7,7 @@ Semana #11 (23/2 => 30/2)
 
 ### O que eu fiz?
 
+* criei um novo branch, before-tm, pois os codigos "quebram" com a tm
 * Jogo 3 quase pronto
 * Lui pronto
 
@@ -14,7 +15,9 @@ Semana #11 (23/2 => 30/2)
 
 * subirei o Lui para o GH, talvez fazer alguma adição
 * farei a rotação do quadrado para o jogo 3
+* tornar a posição dos inimigos igual ao do js 
 * lerei o "Structural Analysis for Simple Games Source Codes Applied to Programming Learning"
+
 
 Semana #10 (3/10 => 10/10)
 --------------------------
