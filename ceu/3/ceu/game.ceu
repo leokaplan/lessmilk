@@ -10,15 +10,13 @@ do
     var int tries = 0;
     var int actual = 0;
     loop do
-        var Level leveL with
+        var int result = do Level with
             this.level = actual;
         end;
-        par/or do
-            await leveL.ok;
-            actual = actual + 1;
-        with
-            await leveL.die;
+        if result == 0 then
             tries = tries + 1;
+        else
+            actual = actual + 1;
         end
     end
     await FOREVER;

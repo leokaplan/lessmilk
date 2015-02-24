@@ -5,8 +5,7 @@ input _SDL_KeyboardEvent*    SDL_KEYDOWN;
 #include "player.ceu"
 #include "enemy.ceu"
 class Level with
-    event void ok;
-    event void die;
+    event int ok;
     var int level;
 do
     var int score = 0;
@@ -99,13 +98,13 @@ do
                 if _SDL_HasIntersection(&e:col_box,&player.col_box) then
                     emit e:ok;
                     emit player.hit;
-                    emit die;
+                    emit ok => 0;
                 end
             end 
     end
     with
         every player.ok do
-            emit ok;
+            emit ok => 1;
         end
     end
 end
