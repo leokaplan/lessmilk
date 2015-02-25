@@ -15,12 +15,11 @@ do
     clip.h = tex_h;
     
     this.col_box.x = 0;
-    this.col_box.y = WIN_H-clip.h;
+    this.col_box.y = WIN_H*2/3 - 20;
     this.col_box.w = clip.w;
     this.col_box.h = clip.h;
     
     var _SDL_KeyboardEvent* key;
-    _printf("player\n");
 
     var bool weapon_cooldown;
     par/and do
@@ -75,7 +74,7 @@ do
                 emit ok;
             end
 //            _printf("%d\n",this.col_box.x);
-            if not(y > WIN_H-clip.h or y < 0) then
+            if not(y > WIN_H*2/3 or y < 0) then
                 this.col_box.y = y;
             else
                 speed_y = 0;

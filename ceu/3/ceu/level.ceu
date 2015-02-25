@@ -34,8 +34,12 @@ do
         var int  life_size = 0;
         var char[5] score_txt;
         var int  score_size = 0;
-   
+        var _SDL_Rect line;
+        line.y = WIN_H*2/3+20;
+        _SDL_QueryTexture(_texLINE,null,null,&line.w,&line.h);
+        line.x = WIN_W/2-line.w/2;
    every SDL_REDRAW do
+            _SDL_RenderCopy(_REN,_texLINE, null,&line);
             score_size = _sprintf(score_txt,"%d",score); 
             var _SDL_Texture* score_tex;
             var _SDL_Rect score_r;

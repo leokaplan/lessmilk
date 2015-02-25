@@ -3,6 +3,7 @@
 native do
     SDL_Texture* texPLAYER;
     SDL_Texture* texPIXEL;
+    SDL_Texture* texLINE;
     SDL_Texture* texENEMY;
     SDL_Texture* texENEMY2;
     SDL_Texture* texFIRE;
@@ -14,6 +15,7 @@ end
     load( _texPLAYER , "../images/cube.png" );
     load( _texFIRE , "../images/fire.png" );
     load( _texPIXEL , "../images/pixel.png" );
+    load( _texLINE , "../images/line.png" );
     load( _texENEMY , "../images/enemy.png" );
     load( _texENEMY2 , "../images/bullet.png" );
     load( _texBONUS , "../images/bonus.png" );
