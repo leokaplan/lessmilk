@@ -9,17 +9,82 @@ do
     //l ++
     var int tries = 0;
     var int actual = 0;
-    loop do
-        var int result = do Level with
-            this.level = actual;
-        end;
-        if result == 0 then
-            tries = tries + 1;
-        else
-            actual = actual + 1;
+    par do
+        loop do
+            var int result = do Level with
+                this.level = actual;
+            end;
+            if result == 0 then
+                tries = tries + 1;
+            else
+                actual = actual + 1;
+            end
         end
+    with
+        var char[5] life_txt;
+        var int  life_size = 0;
+        var char[5] score_txt;
+        var int  score_size = 0;
+        var _SDL_Rect line;
+        line.y = WIN_H*2/3+20;
+        _SDL_QueryTexture(_texLINE,null,null,&line.w,&line.h);
+        line.x = WIN_W/2-line.w/2;
+        every SDL_REDRAW do
+                _SDL_RenderCopy(_REN,_texLINE, null,&line);
+                score_size = _sprintf(score_txt,"%d",tries); 
+                var _SDL_Texture* score_tex;
+                var _SDL_Rect score_r;
+                var _SDL_Color score_clr;
+                    score_clr.r = 255;
+                    score_clr.g = 255;
+                    score_clr.b = 255;
+                
+                score_r.x = 10;
+                score_r.y = 10;
+                score_r.w = 10*score_size;
+                score_r.h = 20;
+
+                var _SDL_Surface* score_sfc;
+                finalize
+                    score_sfc = _TTF_RenderText_Blended(_fnt, score_txt, score_clr);
+                with
+                    _SDL_FreeSurface(score_sfc);
+                end
+                finalize
+                    score_tex = _SDL_CreateTextureFromSurface(_REN, score_sfc);
+                with
+                    _SDL_DestroyTexture(score_tex);
+                end
+                _SDL_RenderCopy(_REN, score_tex, null, &score_r);
+                
+                
+                life_size = _sprintf(life_txt,"%d/20",actual); 
+                var _SDL_Texture* life_tex;
+                var _SDL_Rect life_r;
+                var _SDL_Color life_clr;
+                    life_clr.r = 255;
+                    life_clr.g = 255;
+                    life_clr.b = 255;
+                
+                life_r.x = WIN_W - 10*life_size;
+                life_r.y = 10;
+                life_r.w = 10*life_size;
+                life_r.h = 20;
+
+                var _SDL_Surface* life_sfc;
+                finalize
+                    life_sfc = _TTF_RenderText_Blended(_fnt, life_txt, life_clr);
+                with
+                    _SDL_FreeSurface(life_sfc);
+                end
+                finalize
+                    life_tex = _SDL_CreateTextureFromSurface(_REN, life_sfc);
+                with
+                    _SDL_DestroyTexture(life_tex);
+                end
+                _SDL_RenderCopy(_REN, life_tex, null, &life_r);
     end
-    await FOREVER;
+    //await FOREVER;
         /*
     every level.ok do
         actual++;
@@ -28,4 +93,5 @@ do
         end
     end
         */
+end
 end	
