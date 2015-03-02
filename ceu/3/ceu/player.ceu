@@ -38,7 +38,7 @@ do
         var int dt;
         every dt in SDL_DT do
             if not onfloor  then
-                angle = angle + 1;
+                angle = angle + 5;
             else 
                 angle = 0;
             end
