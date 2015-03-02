@@ -1,4 +1,41 @@
-Semana #11 (23/2 => 30/2)
+Semana #12 (2/3 => 9/3)
+--------------------------
+
+### O que eu faria?
+* subirei o Lui para o GH, talvez fazer alguma adição
+* farei a rotação do quadrado para o jogo 3
+* tornar a posição dos inimigos igual ao do js 
+* lerei o "Structural Analysis for Simple Games Source Codes Applied to Programming Learning"
+
+### O que eu fiz?
+
+* li o "Structural Analysis for Simple Games Source Codes Applied to Programming Learning"
+   * Artigo interessante, fala do JPlay, um framework Java para desenvolvimento de jogos 2D. 
+   * Os pontos altos na minha opinião são a metodologia de ensino e o software de apoio.
+   * Achei interessante esse caminho da didatica.
+* Jogo 3 
+   * Concluido
+   * Pensei em fazer a interface Drawable e o organismo de Tween, para imitar o phaser. 
+   * Não foi necessário mas acho valido começar o proximo projeto com essa interface.
+* Não consegui subir a ultima versao do Lui pois está no computador que não liga. Vou ler o hd dele de outra maquina ou reescrever as ultimas mudanças, o que for mais facil.
+
+### O que eu farei?
+   
+* Começar o Jogo 4
+   * Fazer uma interface drawable e uma collidable  
+* Ler:
+   * Developing 2D games in a declarative way
+   * LuaGame: A framework for developing games in Lua for the Digital TV 
+* Procurar artigos na linha de educação de programação/jogos
+   * nas referências dos já lidos
+   * buscar por keywords
+* Pensar em tutoriais, pensei em me basear nos de SDL/C++ e fazer os mesmos exemplos em céu, comparando.
+   * http://aaroncox.net/tutorials/2dtutorials/index.html
+   * http://www.lazyfoo.net/tutorials/SDL/index.php
+* Dar uma pesquisada em um jogo maior (OpenSource, C++, < 50k LOC) para implementar em ceu/sdl   
+
+
+Semana #11 (23/2 => 2/3)
 --------------------------
 
 ### O que eu faria?
