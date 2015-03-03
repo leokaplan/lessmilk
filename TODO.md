@@ -32,6 +32,7 @@ Semana #12 (2/3 => 9/3)
 * Pensar em tutoriais, pensei em me basear nos de SDL/C++ e fazer os mesmos exemplos em céu, comparando.
    * http://aaroncox.net/tutorials/2dtutorials/index.html
    * http://www.lazyfoo.net/tutorials/SDL/index.php
+   * http://polycode.org/features/
 * Dar uma pesquisada em um jogo maior (OpenSource, C++, < 50k LOC) para implementar em ceu/sdl   
 
 
