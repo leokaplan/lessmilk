@@ -25,23 +25,7 @@ do
 
     par/and do
          every SDL_REDRAW do
-            //_SDL_RenderCopy(_REN,_texPLAYER, &clip,&this.col_box);
             _SDL_RenderCopyEx(_REN,_texPLAYER, &clip, &this.col_box,angle,null,_SDL_FLIP_NONE); 
-        end
-    with
-        every hit do
-            bonus = 1;
-            // menos uma vida
-            col_box.x = 0;
-        end
-    with
-        var int dt;
-        every dt in SDL_DT do
-            if not onfloor  then
-                angle = angle + 5;
-            else 
-                angle = 0;
-            end
         end
     with
         var float x,y,speed_x,speed_y,gravity;
@@ -59,15 +43,6 @@ do
             with
                 nothing;
             end
-            if keyStates[_SDL_SCANCODE_SPACE] and onfloor then
-              // if jump_cooldown then
-              //     speed_y = speed_y - 0.1*ms; 
-                   speed_y = -10; 
-              //      jump_cooldown = false;
-              // end
-                //speed_x;
-            end
-//            _printf("%f %f %f\n",y,speed_y, gravity);
             x = x + speed_x;
             y = y + speed_y;
             speed_y = speed_y + gravity*ms;
@@ -77,13 +52,15 @@ do
                 speed_x = 0;
                 emit ok;
             end
-//            _printf("%d\n",this.col_box.x);
             if not(y > WIN_H*2/3 or y < 0) then
                 this.col_box.y = y;
-                onfloor = false;
+                angle = angle + 5*ms;
             else
                 speed_y = 0;
-                onfloor = true;
+                angle = 0;
+                if keyStates[_SDL_SCANCODE_SPACE] then
+                   speed_y = -10; 
+                end
             end
         end
     end

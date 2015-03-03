@@ -1,0 +1,33 @@
+class Text with
+    var char[100] text;
+    var _SDL_Rect rect;
+    var _SDL_Color clr;
+    var int numchars;
+    var int font_size = 10;
+    event void changed;
+do
+    
+    rect.h = font_size*2;
+    var _SDL_Texture* tex;
+    par do
+        loop do 
+            rect.w = font_size*numchars;
+            var _SDL_Surface* sfc;
+            finalize
+                sfc = _TTF_RenderText_Blended(_fnt, text, clr);
+            with
+                _SDL_FreeSurface(sfc);
+            end
+            finalize
+                tex = _SDL_CreateTextureFromSurface(_REN, sfc);
+            with
+                _SDL_DestroyTexture(tex);
+            end
+            await changed;
+        end
+    with
+        every SDL_REDRAW do
+            _SDL_RenderCopy(_REN, tex, null, &rect);
+        end
+    end
+end
