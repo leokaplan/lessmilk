@@ -1,0 +1,14 @@
+#include "sdl.ceu"
+
+var _SDL_Window[] win;
+    finalize
+        win = _SDL_CreateWindow("My window name", _SDL_WINDOWPOS_CENTERED,
+                                         _SDL_WINDOWPOS_CENTERED,
+                                         640, 800,
+                                         _SDL_WINDOW_SHOWN);
+    with
+        _SDL_DestroyWindow(win);
+    end
+
+await 2s;
+escape 0;

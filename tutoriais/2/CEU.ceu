@@ -1,0 +1,39 @@
+#include "sdl.ceu"
+
+input void SDL_REDRAW;
+var _SDL_Window[] win;
+    finalize
+        win = _SDL_CreateWindow("My window name", _SDL_WINDOWPOS_CENTERED,
+                                         _SDL_WINDOWPOS_CENTERED,
+                                         640, 800,
+                                         _SDL_WINDOW_SHOWN);
+    with
+        _SDL_DestroyWindow(win);
+    end
+
+var _SDL_Renderer[] ren;
+    finalize
+        ren = _SDL_CreateRenderer(win, -1, 0);
+    with
+        _SDL_DestroyRenderer(ren);
+    end
+
+var _SDL_Rect quad;
+    quad.x = 100;
+    quad.y = 100;
+    quad.w = 50;
+    quad.h = 50;
+
+var _SDL_Color color;
+    color.r = 0xFF;
+    color.g = 0x00;
+    color.b = 0x00;
+
+_SDL_SetRenderDrawColor(ren, color.r,color.g,color.b,0xFF);
+_SDL_RenderFillRect(ren, &quad);
+
+every SDL_REDRAW do
+        _SDL_RenderPresent(ren);
+end
+
+escape 0;
