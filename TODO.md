@@ -1,3 +1,37 @@
+Semana #13 (9/3 => 16/3)
+--------------------------
+
+### O que eu faria?
+* Começar o Jogo 4
+   * Fazer uma interface drawable e uma collidable  
+* Ler:
+   * Developing 2D games in a declarative way
+   * LuaGame: A framework for developing games in Lua for the Digital TV 
+* Procurar artigos na linha de educação de programação/jogos
+   * nas referências dos já lidos
+   * buscar por keywords
+* Pensar em tutoriais, pensei em me basear nos de SDL/C++ e fazer os mesmos exemplos em céu, comparando.
+   * http://aaroncox.net/tutorials/2dtutorials/index.html
+   * http://www.lazyfoo.net/tutorials/SDL/index.php
+   * http://polycode.org/features/
+* Dar uma pesquisada em um jogo maior (OpenSource, C++, < 50k LOC) para implementar em ceu/sdl   
+
+### O que eu fiz?
+
+* Li:
+   * Developing 2D games in a declarative way
+      * Bem legal, baseado em Qt, posso usar varios conceitos no lui.  
+   * LuaGame: A framework for developing games in Lua for the Digital TV 
+      * Aplicação de conceitos já bem consolidados em um ambiente novo (TV digital), não sei o quanto posso aproveitar. Vou dar uma olhada nas referencias/trabalhos relacionados.
+* Comecei os tutoriais
+* Escolhi um jogo maior(pingus) e já comecei a estudar o código e como integrar Céu
+
+### O que eu farei?
+  * Procurar os novos papers
+  * Começar o jogo 4? Focar no jogo maior?
+  * Continuar os tutorias, tentar fazer no mínimo 1 por semana.
+
+
 Semana #12 (2/3 => 9/3)
 --------------------------
 
