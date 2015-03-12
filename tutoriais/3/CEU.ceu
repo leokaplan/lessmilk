@@ -25,30 +25,19 @@ var _SDL_Rect quad;
     quad.w = 50;
     quad.h = 50;
 
-var _SDL_Color red;
-    red.r = 0xFF;
-    red.g = 0x00;
-    red.b = 0x00;
+var _SDL_Color color;
+    color.r = 0xFF;
+    color.g = 0x00;
+    color.b = 0x00;
 
-var _SDL_Color blue;
-    blue.r = 0x00;
-    blue.g = 0x00;
-    blue.b = 0xFF;
-
+_SDL_SetRenderDrawColor(ren, color.r,color.g,color.b,0xFF);
+_SDL_RenderFillRect(ren, &quad);
 
 par/or do
     await SDL_QUIT;
 with
     every SDL_REDRAW do
-        _SDL_RenderFillRect(ren, &quad);
         _SDL_RenderPresent(ren);
-    end
-with
-    loop do
-        _SDL_SetRenderDrawColor(ren, red.r,red.g,red.b,0xFF);
-        await 1s;
-        _SDL_SetRenderDrawColor(ren, blue.r,blue.g,blue.b,0xFF);
-        await 1s;
     end
 end
 escape 0;
