@@ -1,3 +1,24 @@
+Semana #14 (16/3 => 23/3)
+--------------------------
+
+### O que eu faria?
+ * Procurar os novos papers
+  * Focar no jogo maior?
+  * Continuar os tutorias, tentar fazer no mínimo 1 por semana.
+
+### O que eu fiz?
+
+* Li:
+  * http://www.ggjcwb.com/wp-content/uploads/2011/01/76815_radtke_binder_sbgames_final.pdf
+    * Achei bem legal a forma como ele descreve o curso, vou procurar mais coisas na linha.   
+* Fiz mais tutoriais e pesquisei referencias/fiz experimentos 
+* Consegui rodar o céu de dentro do pingus, mas ainda não desenhei, como tinha planejado.
+
+### O que eu farei?
+  * Procurar  novos papers
+  * Renderizar uma textura(nuvens) e andar com ela no tempo, fazendo loop, como no jogo. se possível tentar deixar imperceptivel a presença do ceu.
+  * Continuar os tutorias
+
 Semana #13 (9/3 => 16/3)
 --------------------------
 
