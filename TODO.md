@@ -2,6 +2,24 @@ Semana #14 (16/3 => 23/3)
 --------------------------
 
 ### O que eu faria?
+  * Procurar  novos papers
+  * Renderizar uma textura(nuvens) e andar com ela no tempo, fazendo loop, como no jogo. se possível tentar deixar imperceptivel a presença do ceu.
+  * Continuar os tutorias
+  
+### O que eu fiz?
+  * renderizei um quadrado mas "na mão" e não dentro do sistema de renderização deles
+  * fiz um tutorial
+
+### O que eu farei?
+  * renderizar um quadrado usando Display::get_framebuffer()->fillrect()
+  * modificar a cena do jogo para retirar as nuvens
+  * desenhar as nuvens em ceu (e desenhar atras do resto)
+  
+
+Semana #14 (16/3 => 23/3)
+--------------------------
+
+### O que eu faria?
  * Procurar os novos papers
   * Focar no jogo maior?
   * Continuar os tutorias, tentar fazer no mínimo 1 por semana.
