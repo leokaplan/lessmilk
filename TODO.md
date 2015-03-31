@@ -1,4 +1,25 @@
-Semana #14 (16/3 => 23/3)
+Semana #16 (16/3 => 23/3)
+--------------------------
+
+### O que eu faria?
+  * renderizar um quadrado usando Display::get_framebuffer()->fillrect()
+  * modificar a cena do jogo para retirar as nuvens
+  * desenhar as nuvens em ceu (e desenhar atras do resto)
+  
+### O que eu fiz?
+  * aprendi como referenciar as classes c++ e controla-las via ceu
+   * organismos "internos" para "reproduzir" herança 
+  * removi variaveis de estado do armageddon(clique duplo) e do menubutton(clique e hover)
+
+### O que eu farei?
+  * transformar anotacoes de eliminação de maquina de estado em um guia/apresentação
+   * ler o paper do sensys http://ceu-lang.org/chico/ceu_sensys13_pre.pdf 
+  * continuar removendo variaveis de estado
+   * pingus(o personagem)?
+   * sprite(animação)?
+   * outros action buttons?
+  
+Semana #15 (16/3 => 23/3)
 --------------------------
 
 ### O que eu faria?
